@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import { Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-    <h1>App is online</h1>
+    <div>
+      <Route exact path="/" />
     </div>
   );
 }
