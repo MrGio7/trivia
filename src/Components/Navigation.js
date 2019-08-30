@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import "../Assets/SCSS/Navigation.scss";
+
 import Closed from "../Assets/Img/hamburger-closed.png";
 import Opened from "../Assets/Img/hamburger-opened.png";
 import UserLogo from "../Assets/Img/user.png";
@@ -20,8 +22,17 @@ const Navigation = props => {
   const opened = () => {
     return (
       <div className="navOpened">
+          <div className="navBtns">
         <img src={Opened} alt="menu button" onClick={menuOpenHandler} />
         <img src={UserLogo} alt="user button" onClick={menuOpenHandler} />
+        </div>
+        <div className="navMenu" >
+            <ul>
+                <h2>Home</h2>
+                <h2>Ranking</h2>
+                <h2>About</h2>
+            </ul>
+        </div>
       </div>
     );
   };

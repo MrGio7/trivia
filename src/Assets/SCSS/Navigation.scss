@@ -1,0 +1,33 @@
+.navBar {
+  .navClosed {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 1rem;
+
+    img {
+      height: 3rem;
+      cursor: pointer;
+    }
+  }
+
+  .navOpened {
+    .navBtns {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      padding: 1rem;
+
+      img {
+        height: 3rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .navMenu{
+      h2{
+          cursor: pointer;
+      }
+  }
+}
