@@ -3,13 +3,13 @@ import { Route } from "react-router-dom";
 
 import "./Assets/SCSS/App.scss";
 
-import { Navigation } from "./Components";
+import { Navigation, Home } from "./Components";
 
 function App() {
   return (
     <div className="app">
-      <Navigation />
-      <Route exact path="/" />
+      <Route path="/"  component={Navigation} />
+      <Route exact path="/" component={Home} />
     </div>
   );
 }
