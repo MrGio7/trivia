@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import '../../Assets/SCSS/Ranking.scss';
+
 const Ranking = () => {
   const [questions, setQuestions] = useState([
     {
@@ -46,8 +48,7 @@ const Ranking = () => {
       setQuestions([...questions]);
 };
 
-  console.log(questions);
-  console.log(question);
+console.log(questions)
 
   return (
     <div className="ranking">
@@ -62,11 +63,9 @@ const Ranking = () => {
       <div className="answers">
         {question.answers.map((object, index) => {
           return (
-            <div key={index}>
-              <button onClick={answerHandler}>
+              <button key={index} onClick={answerHandler}>
                 <span>{object}</span>
               </button>
-            </div>
           );
         })}
       </div>
