@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { XmlEntities } from "html-entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 
@@ -45,25 +46,24 @@ const Ranking = () => {
   const question = questions[0];
 
   const answerHandler = ev => {
-
     if (ev.target.value === question.correct) {
       ev.target.className = "correct";
-      document.getElementsByClassName("overly")[0].className = 'overly cover';
+      document.getElementsByClassName("overly")[0].className = "overly cover";
       setScore(score + 100);
       setTimeout(() => {
         questions.shift();
         setQuestions([...questions]);
-        document.getElementsByClassName("correct")[0].className = '';
-        document.getElementsByClassName("overly")[0].className = 'overly';
+        document.getElementsByClassName("correct")[0].className = "";
+        document.getElementsByClassName("overly")[0].className = "overly";
       }, 3000);
     } else {
       ev.target.className = "incorrect";
-      document.getElementsByClassName("overly")[0].className = 'overly cover';
+      document.getElementsByClassName("overly")[0].className = "overly cover";
       setTimeout(() => {
         questions.shift();
         setQuestions([...questions]);
-        document.getElementsByClassName("incorrect")[0].className = '';
-        document.getElementsByClassName("overly")[0].className = 'overly';
+        document.getElementsByClassName("incorrect")[0].className = "";
+        document.getElementsByClassName("overly")[0].className = "overly";
       }, 3000);
     }
   };
@@ -78,7 +78,7 @@ const Ranking = () => {
       </div>
 
       <div className="question">
-        <p>{question.question} </p>
+        <p>{XmlEntities.decode(question.question)} </p>
       </div>
 
       <div className="answers">
