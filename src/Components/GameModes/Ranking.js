@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { XmlEntities } from "html-entities";
+import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 
@@ -30,9 +30,9 @@ const Ranking = () => {
 
           return {
             category: each.category,
-            question: each.question,
-            answers: each.incorrect_answers,
-            correct: each.correct_answer
+            question: decodeHTML(each.question),
+            answers: each.incorrect_answers.map(each => decodeHTML(each)),
+            correct: decodeHTML(each.correct_answer)
           };
         });
 
@@ -78,7 +78,7 @@ const Ranking = () => {
       </div>
 
       <div className="question">
-        <p>{XmlEntities.decode(question.question)} </p>
+        <p>{question.question} </p>
       </div>
 
       <div className="answers">
