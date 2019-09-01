@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import '../../Assets/SCSS/Ranking.scss';
+import "../../Assets/SCSS/Ranking.scss";
 
 const Ranking = () => {
   const [questions, setQuestions] = useState([
     {
-        answers: ["Hydrangea", "Harebell", "Yarrow", "Lily of the Valley"],
-        category: "Entertainment: Video Games",
-        correct: "Lily of the Valley",
-        question: "In the Animal Crossing series"
+      answers: [],
+      category: "",
+      correct: "",
+      question: ""
     }
   ]);
-  
+
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     axios
@@ -43,12 +44,32 @@ const Ranking = () => {
 
   const question = questions[0];
 
-  const answerHandler = () => {
-      questions.shift();
-      setQuestions([...questions]);
-};
+  const answerHandler = ev => {
 
-console.log(questions)
+    if (ev.target.value === question.correct) {
+      ev.target.className = "correct";
+      document.getElementsByClassName("overly")[0].className = 'overly cover';
+      setScore(score + 100);
+      setTimeout(() => {
+        questions.shift();
+        setQuestions([...questions]);
+        document.getElementsByClassName("correct")[0].className = '';
+        document.getElementsByClassName("overly")[0].className = 'overly';
+      }, 3000);
+    } else {
+      ev.target.className = "incorrect";
+      document.getElementsByClassName("overly")[0].className = 'overly cover';
+      setTimeout(() => {
+        questions.shift();
+        setQuestions([...questions]);
+        document.getElementsByClassName("incorrect")[0].className = '';
+        document.getElementsByClassName("overly")[0].className = 'overly';
+      }, 3000);
+    }
+  };
+
+  console.log(question);
+  console.log(score);
 
   return (
     <div className="ranking">
@@ -61,11 +82,15 @@ console.log(questions)
       </div>
 
       <div className="answers">
+        <div className="overly" />
         {question.answers.map((object, index) => {
           return (
-              <button key={index} onClick={answerHandler}>
-                <span>{object}</span>
-              </button>
+            <input
+              key={index}
+              type="button"
+              value={object}
+              onClick={answerHandler}
+            />
           );
         })}
       </div>
