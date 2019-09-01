@@ -20,11 +20,14 @@ const Home = props => {
         since the 1500s
       </p>
 
+      <Link to="/ranking">
+        <button className="button">
+          <span>Ranking </span>
+        </button>
+      </Link>
+
       <button className="button">
-        <span><img src={Ranking} /> Ranking </span>
-      </button>
-      <button className="button">
-        <span><img src={Casual} />Casual </span>
+        <span>Casual </span>
       </button>
       <button className="button">
         <span>Select Category</span>
