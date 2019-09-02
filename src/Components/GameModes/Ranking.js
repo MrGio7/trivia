@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { decodeHTML } from "entities";
 
@@ -13,8 +13,8 @@ const Ranking = () => {
       question: ""
     }
   ]);
-
   const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(30);
 
   useEffect(() => {
     axios
@@ -68,13 +68,45 @@ const Ranking = () => {
     }
   };
 
-  console.log(question);
-  console.log(score);
+  // Timer useInterval Function
+
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest function.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+  // Setting up timer
+
+  useInterval(() => {
+    setTimer(timer - 1);
+    if (timer === 0) {
+      questions.shift();
+      setQuestions([...questions]);
+      setTimer(20);
+    }
+  }, 1000);
 
   return (
     <div className="ranking">
       <div className="category">
         <h2>{question.category}</h2>
+        <h2>{timer}</h2>
+        <h2>score: {score}</h2>
       </div>
 
       <div className="question">
