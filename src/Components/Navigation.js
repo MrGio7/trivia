@@ -22,16 +22,19 @@ const Navigation = props => {
   const opened = () => {
     return (
       <div className="navOpened">
-          <div className="navBtns">
-        <img src={Opened} alt="menu button" onClick={menuOpenHandler} />
-        <img src={UserLogo} alt="user button" onClick={menuOpenHandler} />
+        <div className="navBtns">
+          <img src={Opened} alt="menu button" onClick={menuOpenHandler} />
+          <img src={UserLogo} alt="user button" onClick={menuOpenHandler} />
         </div>
-        <div className="navMenu" >
-            <ul>
-                <h2>🅷🅾🅼🅴</h2>
-                <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
-                <h2>🅰🅱🅾🆄🆃</h2>
-            </ul>
+        <div className="navMenu">
+          <ul>
+            <Link to="/">
+              <h2>🅷🅾🅼🅴</h2>
+            </Link>
+
+            <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+            <h2>🅰🅱🅾🆄🆃</h2>
+          </ul>
         </div>
       </div>
     );

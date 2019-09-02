@@ -14,7 +14,8 @@ const Ranking = () => {
     }
   ]);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(20);
+  const [loader, setLoader] = useState(true);
 
   const question = questions[0];
 
@@ -39,6 +40,7 @@ const Ranking = () => {
         });
 
         setQuestions(filteredQuestions);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err);
@@ -132,7 +134,9 @@ const Ranking = () => {
     }
   }, 1000);
 
-  return (
+  return loader ? (
+    <div className="loader" />
+  ) : (
     <div className="ranking">
       <h3>SCORE: {score}</h3>
       <div className="category">

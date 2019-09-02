@@ -55,6 +55,11 @@
     border-radius: 0 0 10px 0;
     padding: 2rem;
 
+    a{
+      text-decoration: none;
+      color: black;
+    }
+
     h2 {
       animation: fontGrowth 1s 1;
       font-size: 2rem;
