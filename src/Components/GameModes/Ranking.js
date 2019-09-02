@@ -16,6 +16,8 @@ const Ranking = () => {
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(30);
 
+  const question = questions[0];
+
   useEffect(() => {
     axios
       .get(
@@ -43,25 +45,27 @@ const Ranking = () => {
       });
   }, []);
 
-  const question = questions[0];
-
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
       ev.target.className = "correct";
       document.getElementsByClassName("overly")[0].className = "overly cover";
-      setScore(score + 100);
+      setScore(score + 100 * timer);
+      setTimer(4);
       setTimeout(() => {
         questions.shift();
         setQuestions([...questions]);
+        setTimer(20);
         document.getElementsByClassName("correct")[0].className = "";
         document.getElementsByClassName("overly")[0].className = "overly";
       }, 3000);
     } else {
       ev.target.className = "incorrect";
       document.getElementsByClassName("overly")[0].className = "overly cover";
+      setTimer(4);
       setTimeout(() => {
         questions.shift();
         setQuestions([...questions]);
+        setTimer(20);
         document.getElementsByClassName("incorrect")[0].className = "";
         document.getElementsByClassName("overly")[0].className = "overly";
       }, 3000);
