@@ -47,28 +47,45 @@ const Ranking = () => {
 
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
-      ev.target.className = "correct";
-      document.getElementsByClassName("overly")[0].className = "overly cover";
-      setScore(score + 100 * timer);
-      setTimer(4);
-      setTimeout(() => {
-        questions.shift();
-        setQuestions([...questions]);
-        setTimer(20);
-        document.getElementsByClassName("correct")[0].className = "";
-        document.getElementsByClassName("overly")[0].className = "overly";
-      }, 3000);
+      if (questions.length !== 1) {
+        ev.target.className = "correct";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
+        setScore(score + 100 * timer);
+        setTimer(4);
+        setTimeout(() => {
+          questions.shift();
+          setQuestions([...questions]);
+          setTimer(20);
+          document.getElementsByClassName("correct")[0].className = "";
+          document.getElementsByClassName("overly")[0].className = "overly";
+        }, 3000);
+      } else {
+        ev.target.className = "correct";
+        setScore(score + 100 * timer);
+        setTimer(4);
+        setTimeout(() => {
+          alert(`Congrats, your score is ${score}`);
+        }, 3000);
+      }
     } else {
-      ev.target.className = "incorrect";
-      document.getElementsByClassName("overly")[0].className = "overly cover";
-      setTimer(4);
-      setTimeout(() => {
-        questions.shift();
-        setQuestions([...questions]);
-        setTimer(20);
-        document.getElementsByClassName("incorrect")[0].className = "";
-        document.getElementsByClassName("overly")[0].className = "overly";
-      }, 3000);
+      if (questions.length !== 1) {
+        ev.target.className = "incorrect";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
+        setTimer(4);
+        setTimeout(() => {
+          questions.shift();
+          setQuestions([...questions]);
+          setTimer(20);
+          document.getElementsByClassName("incorrect")[0].className = "";
+          document.getElementsByClassName("overly")[0].className = "overly";
+        }, 3000);
+      } else {
+        ev.target.className = "incorrect";
+        setTimer(4);
+        setTimeout(() => {
+          alert(`Congrats, your score is ${score}`);
+        }, 3000);
+      }
     }
   };
 
@@ -98,19 +115,27 @@ const Ranking = () => {
 
   useInterval(() => {
     setTimer(timer - 1);
-    if (timer === 0) {
-      questions.shift();
-      setQuestions([...questions]);
-      setTimer(20);
+    if (questions.length !== 1) {
+      if (timer === 0) {
+        questions.shift();
+        setQuestions([...questions]);
+        setTimer(20);
+      }
+    } else {
+      if (timer === 0) {
+        alert(`Congrats, your score is ${score}`);
+      }
     }
   }, 1000);
 
+  console.log(questions);
+
   return (
     <div className="ranking">
+      <h3>SCORE: {score}</h3>
       <div className="category">
         <h2>{question.category}</h2>
         <h2>{timer}</h2>
-        <h2>score: {score}</h2>
       </div>
 
       <div className="question">
