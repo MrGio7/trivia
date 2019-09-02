@@ -28,9 +28,9 @@ const Navigation = props => {
         </div>
         <div className="navMenu" >
             <ul>
-                <h2>Home</h2>
-                <h2>Ranking</h2>
-                <h2>About</h2>
+                <h2>🅷🅾🅼🅴</h2>
+                <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+                <h2>🅰🅱🅾🆄🆃</h2>
             </ul>
         </div>
       </div>
