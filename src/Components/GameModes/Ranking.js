@@ -70,6 +70,9 @@ const Ranking = () => {
     } else {
       if (questions.length !== 1) {
         ev.target.className = "incorrect";
+        [].filter.call(document.getElementsByTagName("input"), function(input) {
+          return input.value === question.correct;
+        })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
@@ -77,6 +80,7 @@ const Ranking = () => {
           setQuestions([...questions]);
           setTimer(20);
           document.getElementsByClassName("incorrect")[0].className = "";
+          document.getElementsByClassName("correct")[0].className = "";
           document.getElementsByClassName("overly")[0].className = "overly";
         }, 3000);
       } else {
@@ -127,8 +131,6 @@ const Ranking = () => {
       }
     }
   }, 1000);
-
-  console.log(questions);
 
   return (
     <div className="ranking">
