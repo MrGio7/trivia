@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { decodeHTML } from "entities";
 
@@ -13,8 +13,11 @@ const Ranking = () => {
       question: ""
     }
   ]);
-
   const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(20);
+  const [loader, setLoader] = useState(true);
+
+  const question = questions[0];
 
   useEffect(() => {
     axios
@@ -37,44 +40,108 @@ const Ranking = () => {
         });
 
         setQuestions(filteredQuestions);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
 
-  const question = questions[0];
-
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
-      ev.target.className = "correct";
-      document.getElementsByClassName("overly")[0].className = "overly cover";
-      setScore(score + 100);
-      setTimeout(() => {
-        questions.shift();
-        setQuestions([...questions]);
-        document.getElementsByClassName("correct")[0].className = "";
-        document.getElementsByClassName("overly")[0].className = "overly";
-      }, 3000);
+      if (questions.length !== 1) {
+        ev.target.className = "correct";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
+        setScore(score + 100 * timer);
+        setTimer(4);
+        setTimeout(() => {
+          questions.shift();
+          setQuestions([...questions]);
+          setTimer(20);
+          document.getElementsByClassName("correct")[0].className = "";
+          document.getElementsByClassName("overly")[0].className = "overly";
+        }, 3000);
+      } else {
+        ev.target.className = "correct";
+        setScore(score + 100 * timer);
+        setTimer(4);
+        setTimeout(() => {
+          alert(`Congrats, your score is ${score}`);
+        }, 3000);
+      }
     } else {
-      ev.target.className = "incorrect";
-      document.getElementsByClassName("overly")[0].className = "overly cover";
-      setTimeout(() => {
-        questions.shift();
-        setQuestions([...questions]);
-        document.getElementsByClassName("incorrect")[0].className = "";
-        document.getElementsByClassName("overly")[0].className = "overly";
-      }, 3000);
+      if (questions.length !== 1) {
+        ev.target.className = "incorrect";
+        [].filter.call(document.getElementsByTagName("input"), function(input) {
+          return input.value === question.correct;
+        })[0].className = "correct";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
+        setTimer(4);
+        setTimeout(() => {
+          questions.shift();
+          setQuestions([...questions]);
+          setTimer(20);
+          document.getElementsByClassName("incorrect")[0].className = "";
+          document.getElementsByClassName("correct")[0].className = "";
+          document.getElementsByClassName("overly")[0].className = "overly";
+        }, 3000);
+      } else {
+        ev.target.className = "incorrect";
+        setTimer(4);
+        setTimeout(() => {
+          alert(`Congrats, your score is ${score}`);
+        }, 3000);
+      }
     }
   };
 
-  console.log(question);
-  console.log(score);
+  // Timer useInterval Function
 
-  return (
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest function.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+  // Setting up timer
+
+  useInterval(() => {
+    setTimer(timer - 1);
+    if (questions.length !== 1) {
+      if (timer === 0) {
+        questions.shift();
+        setQuestions([...questions]);
+        setTimer(20);
+      }
+    } else {
+      if (timer === 0) {
+        alert(`Congrats, your score is ${score}`);
+      }
+    }
+  }, 1000);
+
+  return loader ? (
+    <div className="loader" />
+  ) : (
     <div className="ranking">
+      <h3>SCORE: {score}</h3>
       <div className="category">
         <h2>{question.category}</h2>
+        <h2>{timer}</h2>
       </div>
 
       <div className="question">

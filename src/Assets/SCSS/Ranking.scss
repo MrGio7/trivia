@@ -1,3 +1,14 @@
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #db3434;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+  margin-top: 15%;
+}
+
 .ranking {
   display: flex;
   flex-direction: column;
@@ -7,7 +18,15 @@
   margin: 0 auto;
   margin-top: 10%;
 
+  h3{
+    color: #e91e1e;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
   .category {
+    display: flex;
+    justify-content: space-between;
     background-image: linear-gradient(141deg, #dc143c, #8b0000);
     border-radius: 5px;
     padding: 10px;
@@ -86,4 +105,9 @@
     opacity: 1}
   to {background-color: #f4511e;
     opacity: 1}
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
