@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import "../Assets/SCSS/Navigation.scss";
 
@@ -10,45 +11,122 @@ import UserLogo from "../Assets/Img/user.png";
 const Navigation = props => {
   const [statusMenu, setStatusMenu] = useState(false);
   const [statusUser, setStatusUser] = useState(false);
+  const [user, setUser] = useState({ username: "", password: "" });
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/users/user`, {
+        headers: { token: localStorage.token }
+      })
+      .then(res => {
+        setUserInfo(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  const changeHandler = ev => {
+    ev.persist();
+    setUser(user => ({
+      ...user,
+      [ev.target.name]: ev.target.value
+    }));
+  };
+
+  const loginHandler = ev => {
+    ev.preventDefault();
+    axios
+      .post(`http://localhost:5000/api/users/login`, user)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        setStatusUser(false);
+        localStorage.setItem("token", res.data.token);
+        props.history.go();
+      })
+      .catch(err => {
+        console.log(err);
+        alert("Invalid Credentials");
+      });
+  };
+
+  const LogOut = () => {
+    localStorage.removeItem("token");
+    props.history.push("/");
+  };
+
+  const menuPage = () => {
+    return statusMenu ? (
+      <div className="navMenu">
+        <ul>
+          <Link to="/">
+            <h2>🅷🅾🅼🅴</h2>
+          </Link>
+
+          <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+          <h2>🅰🅱🅾🆄🆃</h2>
+        </ul>
+      </div>
+    ) : null;
+  };
+
+  const loginPage = () => {
+    return statusUser ? (
+      <div className="navUser">
+        <form onSubmit={loginHandler}>
+          <label>
+            <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter UserName"
+            onChange={changeHandler}
+            name="username"
+            value={user.username}
+          />
+
+          <label>
+            <h3>🅿🅰🆂🆂🆆🅾🆁🅳:</h3>
+          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={changeHandler}
+            name="password"
+            value={user.password}
+          />
+
+          <div className="log_reg">
+            <input type="submit" className="loginBtn" value="Login" />
+            <input type="button" className="loginBtn" value="Register" />
+          </div>
+        </form>
+      </div>
+    ) : null;
+  };
+
+  const userPage = () => {
+    return statusUser ? (
+      <div className="userPage">
+        <img src={userInfo.img} alt="picture of the user" />
+        <h2>Welcome {userInfo.user}</h2>
+        <input
+          type="button"
+          className="logoutBtn"
+          value="Logout"
+          onClick={LogOut}
+        />
+      </div>
+    ) : null;
+  };
 
   const openedMenu = () => {
     return (
       <div className="navOpened">
-        {statusMenu ? (
-          <div className="navMenu">
-            <ul>
-              <Link to="/">
-                <h2>🅷🅾🅼🅴</h2>
-              </Link>
-
-              <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
-              <h2>🅰🅱🅾🆄🆃</h2>
-            </ul>
-          </div>
-        ) : null}
-
-        {statusUser ? (
-          <div className="navUser">
-            <ul>
-              <form>
-                <label>
-                  <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
-                </label>
-                <input type="text" placeholder="Enter Username" />
-
-                <label>
-                  <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
-                </label>
-                <input type="Password" placeholder="Enter Password" />
-
-                <div className="log_reg">
-                <input type="submit" className="loginBtn" value="Login" />
-                <input type="button" className="loginBtn" value="Register" />
-                </div>
-              </form>
-            </ul>
-          </div>
-        ) : null}
+        {menuPage()}
+        {localStorage.token ? userPage() : loginPage()}
       </div>
     );
   };
