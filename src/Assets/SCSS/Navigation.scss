@@ -1,5 +1,4 @@
 .navBar {
-
   .navOpened {
     display: flex;
   }
@@ -23,7 +22,6 @@
     }
   }
 
-
   .navMenu {
     animation: flipMenu 1s 1;
     display: flex;
@@ -40,7 +38,7 @@
     border-radius: 0 0 10px 0;
     padding: 2rem;
 
-    a{
+    a {
       text-decoration: none;
       color: black;
     }
@@ -66,21 +64,50 @@
       #f08080,
       #dc143c 80%
     );
-    height: 60%;
     border-radius: 0 0 10px 0;
     padding: 2rem;
     margin-left: auto;
 
-    a{
+    a {
       text-decoration: none;
       color: black;
+    }
+
+    input {
+      animation: inputGrowth 1.5s 1;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
     h2 {
       animation: fontGrowth 1s 1;
       font-size: 2rem;
       cursor: pointer;
-      margin: 3rem 0;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .log_reg {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loginBtn {
+      background-color: #008d00;
+      cursor: pointer;
+      border: none;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: 0.3s;
+      margin-top: 1rem;
+    }
+    :hover {
+      opacity: 1;
     }
   }
 }
@@ -113,5 +140,17 @@
   }
   to {
     font-size: 2rem;
+  }
+}
+
+@keyframes inputGrowth {
+  from {
+    display: none;
+    padding: 0;
+    width: 0.01px;
+  }
+  to {
+    width: 100%;
+    padding: 1rem 1.5rem;
   }
 }

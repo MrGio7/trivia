@@ -30,8 +30,22 @@ const Navigation = props => {
         {statusUser ? (
           <div className="navUser">
             <ul>
-              <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
-              <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
+              <form>
+                <label>
+                  <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
+                </label>
+                <input type="text" placeholder="Enter Username" />
+
+                <label>
+                  <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
+                </label>
+                <input type="Password" placeholder="Enter Password" />
+
+                <div className="log_reg">
+                <input type="submit" className="loginBtn" value="Login" />
+                <input type="button" className="loginBtn" value="Register" />
+                </div>
+              </form>
             </ul>
           </div>
         ) : null}
