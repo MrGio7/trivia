@@ -8,7 +8,9 @@ import { Navigation, Home, Ranking } from "./Components";
 
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
+  const [ranking, setRanking] = useState([]);
 
+  // getting logged in user data
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/users/user`, {
@@ -22,11 +24,25 @@ const App = props => {
       });
   }, []);
 
+  // getting ranking scores array by username
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/score/ranking`)
+      .then(res => {
+        setRanking(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="app">
       <Route
         path="/"
-        render={props => <Navigation {...props} userInfo={userInfo} />}
+        render={props => (
+          <Navigation {...props} userInfo={userInfo} ranking={ranking} />
+        )}
       />
 
       <Route exact path="/" component={Home} />
