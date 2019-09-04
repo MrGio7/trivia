@@ -1,9 +1,15 @@
 .navBar {
-  .navOpened {
-    display: flex;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 10%;
 
   .navBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(
       141deg,
       #dc143c -11%,
@@ -11,30 +17,27 @@
       #dc143c 111%
     );
     box-shadow: 10px 10px 5px grey;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    padding: 1.5rem;
+    padding: 0 2%;
 
     img {
-      height: 3rem;
+      height: 50%;
       cursor: pointer;
     }
   }
 
   .navMenu {
-    animation: flipMenu 1s 1;
+    animation: flipMenu 0.5s 1;
     display: flex;
     flex-direction: column;
     position: absolute;
     z-index: 1;
+    height: 90%;
     background-image: linear-gradient(
       141deg,
       #dc143c 20%,
       #f08080,
       #dc143c 80%
     );
-    border-radius: 0 0 10px 0;
     padding: 2rem;
 
     a {
@@ -43,7 +46,7 @@
     }
 
     h2 {
-      animation: fontGrowth 1s 1;
+      animation: fontGrowth 0.5s 1;
       font-size: 2rem;
       cursor: pointer;
       margin: 3rem 0;
@@ -56,6 +59,7 @@
     flex-direction: column;
     align-items: center;
     position: absolute;
+    height: 90%;
     right: 0px;
     z-index: 1;
     background-image: linear-gradient(
@@ -64,7 +68,6 @@
       #f08080,
       #dc143c 80%
     );
-    border-radius: 0 0 0 10px;
     padding: 2rem;
     margin-left: auto;
 

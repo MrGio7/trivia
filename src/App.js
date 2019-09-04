@@ -4,7 +4,7 @@ import axios from "axios";
 
 import "./Assets/SCSS/App.scss";
 
-import { Navigation, Home, Ranking } from "./Components";
+import { Navigation, Home, Ranking, TopPlayers } from "./Components";
 
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
