@@ -8,7 +8,7 @@ import { Navigation, Home, Ranking, TopPlayers } from "./Components";
 
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
-  const [ranking, setRanking] = useState([]);
+  const [ranking, setRanking] = useState([{score: '', user: ''}]);
 
   // getting logged in user data
   useEffect(() => {
