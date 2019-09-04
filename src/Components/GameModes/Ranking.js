@@ -4,7 +4,7 @@ import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 
-const Ranking = () => {
+const Ranking = props => {
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -16,7 +16,6 @@ const Ranking = () => {
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(20);
   const [loader, setLoader] = useState(true);
-  const [user, setUser] = useState({});
 
   const question = questions[0];
 
@@ -48,11 +47,18 @@ const Ranking = () => {
       });
   }, []);
 
-  const scoreDeployHandler = ev => {
-    ev.preventDefault();
+  const scoreDeployHandler = () => {
+    const userScore = { score: score, id_user: props.userInfo.id };
+
     axios
-    .post(`http://localhost:5000/api/score/add`)
-  }
+      .post(`http://localhost:5000/api/score/add`, userScore)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
@@ -72,6 +78,7 @@ const Ranking = () => {
         ev.target.className = "correct";
         setScore(score + 100 * timer);
         setTimer(4);
+        scoreDeployHandler();
         setTimeout(() => {
           alert(`Congrats, your score is ${score}`);
         }, 3000);
@@ -95,6 +102,7 @@ const Ranking = () => {
       } else {
         ev.target.className = "incorrect";
         setTimer(4);
+        scoreDeployHandler();
         setTimeout(() => {
           alert(`Congrats, your score is ${score}`);
         }, 3000);
@@ -136,6 +144,7 @@ const Ranking = () => {
       }
     } else {
       if (timer === 0) {
+        scoreDeployHandler();
         alert(`Congrats, your score is ${score}`);
       }
     }
