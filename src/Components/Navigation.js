@@ -12,20 +12,6 @@ const Navigation = props => {
   const [statusMenu, setStatusMenu] = useState(false);
   const [statusUser, setStatusUser] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
-  const [userInfo, setUserInfo] = useState({});
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/users/user`, {
-        headers: { token: localStorage.token }
-      })
-      .then(res => {
-        setUserInfo(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
 
   const changeHandler = ev => {
     ev.persist();
@@ -110,8 +96,8 @@ const Navigation = props => {
   const userPage = () => {
     return statusUser ? (
       <div className="userPage">
-        <img src={userInfo.img} alt="picture of the user" />
-        <h2>Welcome {userInfo.user}</h2>
+        <img src={props.userInfo.img} alt="picture of the user" />
+        <h2>Welcome {props.userInfo.user}</h2>
         <input
           type="button"
           className="logoutBtn"

@@ -51,7 +51,7 @@
   }
 
   .userPage {
-    animation: flipUser 1s 1;
+    animation: flipUserPage 1s 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,12 +64,44 @@
       #f08080,
       #dc143c 80%
     );
-    border-radius: 0 0 10px 0;
+    border-radius: 0 0 0 10px;
     padding: 2rem;
     margin-left: auto;
 
     img {
+      animation: imgGrowth 1s 1;
       width: 8rem;
+    }
+
+    h2 {
+      animation: fontGrowth 1s 1;
+      font-size: 2rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      animation: inputGrowth 1.5s 1;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .logoutBtn {
+      background-color: #ff0000;
+      cursor: pointer;
+      border: none;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: 0.3s;
+      margin-top: 1rem;
+    }
+    :hover {
+      opacity: 1;
     }
   }
 
@@ -86,7 +118,7 @@
       #f08080,
       #dc143c 80%
     );
-    border-radius: 0 0 10px 0;
+    border-radius: 0 0 0 10px;
     padding: 2rem;
     margin-left: auto;
 
@@ -163,12 +195,32 @@
   }
 }
 
+@keyframes flipUserPage {
+  from {
+    width: 1px;
+    padding: 0;
+  }
+  to {
+    width: 14.5rem;
+    padding: 2rem;
+  }
+}
+
 @keyframes fontGrowth {
   from {
     font-size: 0.01rem;
   }
   to {
     font-size: 2rem;
+  }
+}
+
+@keyframes imgGrowth {
+  from {
+    width: 0.01rem;
+  }
+  to {
+    width: 8rem;
   }
 }
 

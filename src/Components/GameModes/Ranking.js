@@ -16,6 +16,7 @@ const Ranking = () => {
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(20);
   const [loader, setLoader] = useState(true);
+  const [user, setUser] = useState({});
 
   const question = questions[0];
 
@@ -46,6 +47,12 @@ const Ranking = () => {
         console.log(err);
       });
   }, []);
+
+  const scoreDeployHandler = ev => {
+    ev.preventDefault();
+    axios
+    .post(`http://localhost:5000/api/score/add`)
+  }
 
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
