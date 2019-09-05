@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { decodeHTML } from "entities";
 
+import "../../Assets/SCSS/Casual.scss";
+
 const Casual = props => {
   const [questions, setQuestions] = useState([
     {
