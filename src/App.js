@@ -4,11 +4,11 @@ import axios from "axios";
 
 import "./Assets/SCSS/App.scss";
 
-import { Navigation, Home, Ranking, TopPlayers } from "./Components";
+import { Navigation, Home, Ranking, TopPlayers, Casual } from "./Components";
 
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
-  const [ranking, setRanking] = useState([{score: '', user: ''}]);
+  const [ranking, setRanking] = useState([{ score: "", user: "" }]);
 
   // getting logged in user data
   useEffect(() => {
@@ -52,6 +52,8 @@ const App = props => {
         path="/ranking"
         render={props => <Ranking {...props} userInfo={userInfo} />}
       />
+
+      <Route exact path="/casual" component={Casual} />
     </div>
   );
 };

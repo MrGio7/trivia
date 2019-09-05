@@ -18,9 +18,12 @@ const Home = props => {
         </button>
       </Link>
 
-      <button className="button">
-        <span>Casual </span>
-      </button>
+      <Link to="/casual">
+        <button className="button">
+          <span>Casual </span>
+        </button>
+      </Link>
+
       <button className="button">
         <span>Select Category</span>
       </button>
