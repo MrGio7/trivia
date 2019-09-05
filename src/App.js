@@ -9,6 +9,7 @@ import { Navigation, Home, Ranking, TopPlayers, Casual } from "./Components";
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
   const [ranking, setRanking] = useState([{ score: "", user: "" }]);
+  const [difficulty, setDifficulty] = useState("");
 
   // getting logged in user data
   useEffect(() => {
@@ -45,7 +46,13 @@ const App = props => {
         )}
       />
 
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" render={props => (
+          <Home
+            {...props}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
+        )} />
 
       <Route
         exact
@@ -53,7 +60,17 @@ const App = props => {
         render={props => <Ranking {...props} userInfo={userInfo} />}
       />
 
-      <Route exact path="/casual" component={Casual} />
+      <Route
+        exact
+        path="/casual"
+        render={props => (
+          <Casual
+            {...props}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
+        )}
+      />
     </div>
   );
 };
