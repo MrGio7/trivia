@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -12,20 +12,22 @@ const Navigation = props => {
   const [statusMenu, setStatusMenu] = useState(false);
   const [statusUser, setStatusUser] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
-  const [userInfo, setUserInfo] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/users/user`, {
-        headers: { token: localStorage.token }
-      })
-      .then(res => {
-        setUserInfo(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+  const scoreList = () => {
+    const scores = props.ranking.map(each => each);
+    const filteredScore = scores.filter(
+      each => each.user === props.userInfo.user
+    );
+    const reversed = filteredScore.reverse();
+
+    return reversed;
+  };
+
+  const highestScore = () => {
+    const sorted = scoreList().sort((a, b) => b.score - a.score);
+
+    return sorted[0].score;
+  };
 
   const changeHandler = ev => {
     ev.persist();
@@ -110,8 +112,23 @@ const Navigation = props => {
   const userPage = () => {
     return statusUser ? (
       <div className="userPage">
-        <img src={userInfo.img} alt="picture of the user" />
-        <h2>Welcome {userInfo.user}</h2>
+        <img src={props.userInfo.img} alt="picture of the user" />
+        <h2>Welcome {props.userInfo.user}</h2>
+
+        <div>
+          <h2>Highest Score:</h2>
+          <h3>{highestScore()} </h3>
+        </div>
+
+        <div>
+          <h2>Last Games:</h2>
+          <h3>I) {scoreList()[0].score}</h3>
+          <h3>II) {scoreList()[1].score}</h3>
+          <h3>III) {scoreList()[2].score}</h3>
+          <h3>IV) {scoreList()[3].score}</h3>
+          <h3>V) {scoreList()[4].score}</h3>
+        </div>
+
         <input
           type="button"
           className="logoutBtn"

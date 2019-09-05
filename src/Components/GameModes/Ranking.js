@@ -4,7 +4,7 @@ import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 
-const Ranking = () => {
+const Ranking = props => {
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -47,6 +47,19 @@ const Ranking = () => {
       });
   }, []);
 
+  const scoreDeployHandler = () => {
+    const userScore = { score: score, id_user: props.userInfo.id };
+
+    axios
+      .post(`http://localhost:5000/api/score/add`, userScore)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const answerHandler = ev => {
     if (ev.target.value === question.correct) {
       if (questions.length !== 1) {
@@ -63,9 +76,12 @@ const Ranking = () => {
         }, 3000);
       } else {
         ev.target.className = "correct";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
         setScore(score + 100 * timer);
         setTimer(4);
+        scoreDeployHandler();
         setTimeout(() => {
+          props.history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
       }
@@ -87,8 +103,11 @@ const Ranking = () => {
         }, 3000);
       } else {
         ev.target.className = "incorrect";
+        document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
+        scoreDeployHandler();
         setTimeout(() => {
+          props.history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
       }
@@ -129,6 +148,9 @@ const Ranking = () => {
       }
     } else {
       if (timer === 0) {
+        scoreDeployHandler();
+        document.getElementsByClassName("overly")[0].className = "overly cover";
+        props.history.goBack();
         alert(`Congrats, your score is ${score}`);
       }
     }
