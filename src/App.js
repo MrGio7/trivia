@@ -62,6 +62,8 @@ const App = props => {
             {...props}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
+            category={category}
+            setCategory={setCategory}
           />
         )}
       />
