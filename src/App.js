@@ -19,6 +19,8 @@ const App = props => {
   const [difficulty, setDifficulty] = useState("");
   const [category, setCategory] = useState("");
 
+  console.log(difficulty, category)
+
   // getting logged in user data
   useEffect(() => {
     axios
