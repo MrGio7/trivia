@@ -4,12 +4,20 @@ import axios from "axios";
 
 import "./Assets/SCSS/App.scss";
 
-import { Navigation, Home, Ranking, TopPlayers, Casual } from "./Components";
+import {
+  Navigation,
+  Home,
+  Ranking,
+  TopPlayers,
+  Casual,
+  Categories
+} from "./Components";
 
 const App = props => {
   const [userInfo, setUserInfo] = useState({});
   const [ranking, setRanking] = useState([{ score: "", user: "" }]);
   const [difficulty, setDifficulty] = useState("");
+  const [category, setCategory] = useState("");
 
   // getting logged in user data
   useEffect(() => {
@@ -46,13 +54,17 @@ const App = props => {
         )}
       />
 
-      <Route exact path="/" render={props => (
+      <Route
+        exact
+        path="/"
+        render={props => (
           <Home
             {...props}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
           />
-        )} />
+        )}
+      />
 
       <Route
         exact
@@ -68,6 +80,20 @@ const App = props => {
             {...props}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
+          />
+        )}
+      />
+
+      <Route
+        exact
+        path="/categories"
+        render={props => (
+          <Categories
+            {...props}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+            category={category}
+            setCategory={setCategory}
           />
         )}
       />

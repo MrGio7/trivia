@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { decodeHTML } from "entities";
 
-import "../../Assets/SCSS/Casual.scss";
+import "../../Assets/SCSS/Categories.scss";
 
-const Casual = props => {
+const Categories = props => {
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -140,7 +140,7 @@ const Casual = props => {
   return loader ? (
     <div className="loader" />
   ) : (
-    <div className="casual">
+    <div className="categories">
       <div className="category">
         <h2>{question.category}</h2>
         <h2>{timer}</h2>
@@ -167,4 +167,4 @@ const Casual = props => {
   );
 };
 
-export default Casual;
+export default Categories;

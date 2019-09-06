@@ -51,7 +51,7 @@ const Home = props => {
               <input type="button" value="Easy" onClick={chooseDifficulty} />
             </Link>
             <Link to="/casual">
-              <input type="button" value="Normal" onClick={chooseDifficulty} />
+              <input type="button" value="Medium" onClick={chooseDifficulty} />
             </Link>
             <Link to="/casual">
               <input type="button" value="Hard" onClick={chooseDifficulty} />
