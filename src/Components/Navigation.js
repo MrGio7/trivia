@@ -143,7 +143,7 @@ const Navigation = props => {
     return (
       <div className="navOpened">
         {menuPage()}
-        {localStorage.token ? userPage() : loginPage()}
+        {!localStorage.token || !props.userInfo ? loginPage() : userPage()}
       </div>
     );
   };

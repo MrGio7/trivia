@@ -14,12 +14,12 @@ import {
 } from "./Components";
 
 const App = props => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
   const [ranking, setRanking] = useState([{ score: "", user: "" }]);
   const [difficulty, setDifficulty] = useState("");
   const [category, setCategory] = useState("");
 
-  console.log(difficulty, category)
+  console.log(difficulty, category);
 
   // getting logged in user data
   useEffect(() => {

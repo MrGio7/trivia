@@ -156,35 +156,43 @@ const Ranking = props => {
     }
   }, 1000);
 
-  return loader ? (
-    <div className="loader" />
-  ) : (
-    <div className="ranking">
-      <h3>SCORE: {score}</h3>
-      <div className="category">
-        <h2>{question.category}</h2>
-        <h2>{timer}</h2>
-      </div>
+  // Ranking Component
 
-      <div className="question">
-        <p>{question.question} </p>
-      </div>
+  const rankingComponent = () => {
+    if (!props.userInfo) {
+      return <h2>Please Log In first</h2>
+    } else {
+      return (
+        <div className="ranking">
+          <h3>SCORE: {score}</h3>
+          <div className="category">
+            <h2>{question.category}</h2>
+            <h2>{timer}</h2>
+          </div>
 
-      <div className="answers">
-        <div className="overly" />
-        {question.answers.map((object, index) => {
-          return (
-            <input
-              key={index}
-              type="button"
-              value={object}
-              onClick={answerHandler}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
+          <div className="question">
+            <p>{question.question} </p>
+          </div>
+
+          <div className="answers">
+            <div className="overly" />
+            {question.answers.map((object, index) => {
+              return (
+                <input
+                  key={index}
+                  type="button"
+                  value={object}
+                  onClick={answerHandler}
+                />
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+  };
+
+  return loader ? <div className="loader" /> : rankingComponent();
 };
 
 export default Ranking;
