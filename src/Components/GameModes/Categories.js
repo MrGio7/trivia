@@ -21,7 +21,7 @@ const Categories = props => {
   useEffect(() => {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=30&category=${props.category}&difficulty=${props.difficulty}&type=multiple`
+        `https://opentdb.com/api.php?amount=20&category=${props.category}&difficulty=${props.difficulty}&type=multiple`
       )
       .then(res => {
         const filteredQuestions = res.data.results.map(each => {

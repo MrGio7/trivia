@@ -1,0 +1,113 @@
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #db3434;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+    margin-top: 15%;
+  }
+  
+  .categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10%;
+  
+    h3{
+      color: #e91e1e;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  
+    .category {
+      display: flex;
+      justify-content: space-between;
+      background-image: linear-gradient(141deg, #dc143c, #8b0000);
+      border-radius: 5px;
+      padding: 10px;
+  
+      h2{
+          color:whitesmoke;
+          font-weight: bold;
+      }
+    }
+  
+    .question {
+      background-image: linear-gradient(141deg, #fffafa, #faebd7);
+      border-radius: 5px;
+      padding: 50px 20px;
+      margin: 10px 0;
+      text-align: center;
+    }
+  
+    .answers {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      
+      .overly{
+        position: absolute;
+      }
+  
+      input {
+        white-space: normal;
+          background-color: #f4511e;
+          width: 45%;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          padding: 16px 32px;
+          text-align: center;
+          font-size: 16px;
+          margin: 4px 2px;
+          opacity: 0.6;
+          transition: 0.3s;
+          display: inline-block;
+          text-decoration: none;
+          cursor: pointer;
+      }:hover {opacity: 1}
+  
+      .correct{
+        animation-name: correct;
+        animation-duration: 1s;
+        animation-iteration-count: 3;
+  
+      }
+      .incorrect{
+        animation-name: incorrect;
+        animation-duration: 1s;
+        animation-iteration-count: 3;
+      }
+    }
+  }
+  
+  .cover{
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    z-index: 1;
+  }
+  
+  @keyframes correct {
+    from {background-color: green; 
+      opacity: 1}
+    to {background-color: #f4511e;
+      opacity: 1}
+  }
+  
+  @keyframes incorrect {
+    from {background-color: red; 
+      opacity: 1}
+    to {background-color: #f4511e;
+      opacity: 1}
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
