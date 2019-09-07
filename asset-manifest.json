@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/trivia/static/css/main.7753cb40.chunk.css",
+    "main.js": "/trivia/static/js/main.dad44ba3.chunk.js",
+    "main.js.map": "/trivia/static/js/main.dad44ba3.chunk.js.map",
+    "runtime~main.js": "/trivia/static/js/runtime~main.9e9e68e4.js",
+    "runtime~main.js.map": "/trivia/static/js/runtime~main.9e9e68e4.js.map",
+    "static/js/2.e1a539fb.chunk.js": "/trivia/static/js/2.e1a539fb.chunk.js",
+    "static/js/2.e1a539fb.chunk.js.map": "/trivia/static/js/2.e1a539fb.chunk.js.map",
+    "index.html": "/trivia/index.html",
+    "precache-manifest.9303076817f7c3cf4baaf5ce279dd27f.js": "/trivia/precache-manifest.9303076817f7c3cf4baaf5ce279dd27f.js",
+    "service-worker.js": "/trivia/service-worker.js",
+    "static/css/main.7753cb40.chunk.css.map": "/trivia/static/css/main.7753cb40.chunk.css.map"
+  }
+}
