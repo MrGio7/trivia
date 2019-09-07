@@ -81,6 +81,7 @@ const Ranking = props => {
         setTimer(4);
         scoreDeployHandler();
         setTimeout(() => {
+          props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
           props.history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
@@ -107,6 +108,7 @@ const Ranking = props => {
         setTimer(4);
         scoreDeployHandler();
         setTimeout(() => {
+          props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
           props.history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
@@ -150,6 +152,7 @@ const Ranking = props => {
       if (timer === 0) {
         scoreDeployHandler();
         document.getElementsByClassName("overly")[0].className = "overly cover";
+        props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
         props.history.goBack();
         alert(`Congrats, your score is ${score}`);
       }

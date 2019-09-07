@@ -19,7 +19,7 @@ const App = props => {
   const [difficulty, setDifficulty] = useState("");
   const [category, setCategory] = useState("");
 
-  console.log(difficulty, category);
+  console.log(ranking);
 
   // getting logged in user data
   useEffect(() => {
@@ -73,7 +73,7 @@ const App = props => {
       <Route
         exact
         path="/ranking"
-        render={props => <Ranking {...props} userInfo={userInfo} />}
+        render={props => <Ranking {...props} userInfo={userInfo} ranking={ranking} setRanking={setRanking} />}
       />
 
       <Route
