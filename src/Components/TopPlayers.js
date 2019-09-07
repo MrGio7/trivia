@@ -28,8 +28,8 @@ const TopPlayers = props => {
           return (
             <div key={index}>
               <h2>{index + 1}</h2>
-              <h3>{each.score} </h3>
-              <h4>{each.name} </h4>
+              <h2>{each.score} </h2>
+              <h2>{each.user} </h2>
             </div>
           );
         })}
