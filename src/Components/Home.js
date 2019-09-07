@@ -94,7 +94,7 @@ const Home = props => {
             <span className="close" onClick={modalCloseHandler}>
               &times;
             </span>
-            <h2>Please Choose Difficulty</h2>
+            <h2>Choose Difficulty</h2>
           </div>
           <div className="modal-body">
             <Link to="/casual">
