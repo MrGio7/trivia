@@ -9,7 +9,8 @@ import {
   Home,
   Ranking,
   Casual,
-  Categories
+  Categories,
+  Register
 } from "./Components";
 
 const App = props => {
@@ -100,6 +101,8 @@ const App = props => {
           />
         )}
       />
+
+      <Route exact path='/register' component={Register} />
     </div>
   );
 };

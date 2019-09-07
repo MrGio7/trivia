@@ -4,5 +4,6 @@ import Ranking from "./GameModes/Ranking";
 import TopPlayers from './TopPlayers';
 import Casual from './GameModes/Casual';
 import Categories from './GameModes/Categories';
+import Register from "./Register";
 
-export { Navigation, Home, Ranking, TopPlayers, Casual, Categories };
+export { Navigation, Home, Ranking, TopPlayers, Casual, Categories, Register };
