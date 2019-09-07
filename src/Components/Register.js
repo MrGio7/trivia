@@ -19,6 +19,8 @@ const Register = () => {
                     <input type="password" placeholder="Password" />
 
                     <input type="password" placeholder="Repeat password" />
+
+                    <input type="submit" value="Sign Up" />
                 </form>
             </div>
         </div>
