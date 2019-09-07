@@ -25,7 +25,7 @@ const Register = () => {
 
     if (user.password === user.repeat && user.password !== "") {
       axios
-        .post(`http://localhost:5000/api/users/register`, {
+        .post(`https://trivia-app-server.herokuapp.com/api/users/register`, {
           username: user.username,
           password: user.password,
           img: user.img

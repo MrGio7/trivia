@@ -51,7 +51,7 @@ const Ranking = props => {
     const userScore = { score: score, id_user: props.userInfo.id };
 
     axios
-      .post(`http://localhost:5000/api/score/add`, userScore)
+      .post(`https://trivia-app-server.herokuapp.com/api/score/add`, userScore)
       .then(res => {
         console.log(res.data);
       })

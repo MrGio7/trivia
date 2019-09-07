@@ -40,7 +40,7 @@ const Navigation = props => {
   const loginHandler = ev => {
     ev.preventDefault();
     axios
-      .post(`http://localhost:5000/api/users/login`, user)
+      .post(`https://trivia-app-server.herokuapp.com/api/users/login`, user)
       .then(res => {
         console.log(res);
         console.log(res.data);

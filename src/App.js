@@ -25,7 +25,7 @@ const App = props => {
   // getting logged in user data
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/users/user`, {
+      .get(`https://trivia-app-server.herokuapp.com/api/users/user`, {
         headers: { token: localStorage.token }
       })
       .then(res => {
@@ -39,7 +39,7 @@ const App = props => {
   // getting ranking scores array by username
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/score/ranking`)
+      .get(`https://trivia-app-server.herokuapp.com/api/score/ranking`)
       .then(res => {
         setRanking(res.data);
       })
