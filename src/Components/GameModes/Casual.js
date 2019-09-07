@@ -17,11 +17,12 @@ const Casual = props => {
   const [loader, setLoader] = useState(true);
 
   const question = questions[0];
+  const difficulty = props.difficulty;
 
   useEffect(() => {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=50&difficulty=${props.difficulty}&type=multiple`
+        `https://opentdb.com/api.php?amount=50&difficulty=${difficulty}&type=multiple`
       )
       .then(res => {
         const filteredQuestions = res.data.results.map(each => {

@@ -8,7 +8,6 @@ import {
   Navigation,
   Home,
   Ranking,
-  TopPlayers,
   Casual,
   Categories
 } from "./Components";

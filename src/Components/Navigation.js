@@ -112,7 +112,7 @@ const Navigation = props => {
   const userPage = () => {
     return statusUser ? (
       <div className="userPage">
-        <img src={props.userInfo.img} alt="picture of the user" />
+        <img src={props.userInfo.img} alt="user" />
         <h2>Welcome {props.userInfo.user}</h2>
 
         <div>
