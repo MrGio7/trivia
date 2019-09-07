@@ -163,7 +163,9 @@ const Ranking = props => {
 
   const rankingComponent = () => {
     if (!props.userInfo) {
-      return <h2>Please Log In first</h2>
+      return <div className="warning">
+        <h1>Please Log In first</h1>
+      </div>
     } else {
       return (
         <div className="ranking">
