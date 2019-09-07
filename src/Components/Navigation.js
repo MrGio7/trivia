@@ -90,7 +90,7 @@ const Navigation = props => {
           />
 
           <label>
-            <h3>🅿🅰🆂🆂🆆🅾🆁🅳:</h3>
+            <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
           </label>
           <input
             type="password"
@@ -100,10 +100,8 @@ const Navigation = props => {
             value={user.password}
           />
 
-          <div className="log_reg">
             <input type="submit" className="loginBtn" value="Login" />
             <input type="button" className="loginBtn" value="Register" />
-          </div>
         </form>
       </div>
     ) : null;

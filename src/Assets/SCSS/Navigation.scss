@@ -26,11 +26,13 @@
   }
 
   .navMenu {
-    animation: flipMenu 0.5s 1;
+    animation: flip 0.5s 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: absolute;
     z-index: 1;
+    width: 20%;
     height: 90%;
     background-image: linear-gradient(
       141deg,
@@ -38,7 +40,6 @@
       #f08080,
       #dc143c 80%
     );
-    padding: 2rem;
 
     a {
       text-decoration: none;
@@ -46,21 +47,22 @@
     }
 
     h2 {
-      animation: fontGrowth 0.5s 1;
-      font-size: 2rem;
+      animation: transform 0.5s 1;
+      font-size: 1.8rem;
       cursor: pointer;
-      margin: 3rem 0;
+      margin: 30px 0;
     }
   }
 
   .userPage {
-    animation: flipUserPage 1s 1;
+    animation: flip 0.5s 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    height: 90%;
     right: 0px;
+    height: 90%;
+    width: 20%;
     z-index: 1;
     background-image: linear-gradient(
       141deg,
@@ -68,24 +70,35 @@
       #f08080,
       #dc143c 80%
     );
-    padding: 2rem;
-    margin-left: auto;
 
     img {
-      animation: imgGrowth 1s 1;
-      width: 8rem;
+      animation: transform 0.6s 1;
+      width: 50%;
+      border-radius: 50%;
+    }
+
+    div{
+      animation: transform 0.6s 1;
     }
 
     h2 {
-      animation: fontGrowth 1s 1;
-      font-size: 2rem;
+      animation: transform 0.6s 1;
+      font-size: 1.5rem;
+      font-weight: bold;
       cursor: pointer;
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
+    }
+
+    h3{
+      animation: transform 0.6s 1;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 15px;
     }
 
     input {
-      animation: inputGrowth 1.5s 1;
-      width: 100%;
+      animation: transform 0.6s 1;
+      width: 80%;
       padding: 1rem 1.5rem;
       display: inline-block;
       border: 1px solid #ccc;
@@ -93,6 +106,7 @@
     }
 
     .logoutBtn {
+      animation: transform 0.6s 1;
       background-color: #ff0000;
       cursor: pointer;
       border: none;
@@ -101,7 +115,7 @@
       font-size: 1rem;
       opacity: 0.6;
       transition: 0.3s;
-      margin-top: 1rem;
+      margin-top: 15px;
     }
     :hover {
       opacity: 1;
@@ -109,10 +123,13 @@
   }
 
   .navUser {
-    animation: flipUser 1s 1;
+    animation: flip 0.5s 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: absolute;
+    width: 20%;
+    height: 90%;
     right: 0px;
     z-index: 1;
     background-image: linear-gradient(
@@ -121,9 +138,13 @@
       #f08080,
       #dc143c 80%
     );
-    border-radius: 0 0 0 10px;
-    padding: 2rem;
-    margin-left: auto;
+
+    form{
+      animation: transform 0.5s 1;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+    }
 
     a {
       text-decoration: none;
@@ -131,35 +152,23 @@
     }
 
     input {
-      animation: inputGrowth 1.5s 1;
       width: 100%;
-      padding: 1rem 1.5rem;
-      display: inline-block;
-      border: 1px solid #ccc;
+      padding: 15px 20px;
+      border: 2px solid #ccc;
       box-sizing: border-box;
+      border-radius: 10px;
     }
 
     h2 {
-      animation: fontGrowth 1s 1;
-      font-size: 2rem;
+      animation: transform 0.5s 1;
+      font-size: 1.3rem;
       cursor: pointer;
-      margin-bottom: 1rem;
-    }
-
-    h3 {
-      animation: fontGrowth 1s 1;
-      font-size: 2rem;
-      cursor: pointer;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .log_reg {
-      display: flex;
-      flex-direction: column;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     .loginBtn {
+      animation: transform 0.6s 1;
       background-color: #008d00;
       cursor: pointer;
       border: none;
@@ -176,65 +185,20 @@
   }
 }
 
-@keyframes flipMenu {
+@keyframes flip {
   from {
-    width: 1px;
-    padding: 0;
+    width: 0;
   }
   to {
-    width: 17rem;
-    padding: 2rem;
+    width: 20%;
   }
 }
 
-@keyframes flipUser {
+@keyframes transform {
   from {
-    width: 1px;
-    padding: 0;
+    transform: scale(0)
   }
   to {
-    width: 21.5rem;
-    padding: 2rem;
-  }
-}
-
-@keyframes flipUserPage {
-  from {
-    width: 1px;
-    padding: 0;
-  }
-  to {
-    width: 14.5rem;
-    padding: 2rem;
-  }
-}
-
-@keyframes fontGrowth {
-  from {
-    font-size: 0.01rem;
-  }
-  to {
-    font-size: 2rem;
-  }
-}
-
-@keyframes imgGrowth {
-  from {
-    width: 0.01rem;
-  }
-  to {
-    width: 8rem;
-  }
-}
-
-@keyframes inputGrowth {
-  from {
-    display: none;
-    padding: 0;
-    width: 0.01px;
-  }
-  to {
-    width: 100%;
-    padding: 1rem 1.5rem;
+    transform: scale(1)
   }
 }
