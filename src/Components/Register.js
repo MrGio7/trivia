@@ -23,7 +23,7 @@ const Register = () => {
   const registerHandler = ev => {
     ev.preventDefault();
 
-    if (user.password === user.repeat || user.password) {
+    if (user.password === user.repeat && user.password !== "") {
       axios
         .post(`http://localhost:5000/api/users/register`, {
           username: user.username,
@@ -44,7 +44,7 @@ const Register = () => {
           );
         })
         .catch(err => {
-          if (!user.username || !user.password || !user.img) {
+          if (!user.username && !user.password && !user.img) {
             alert("Please compleate all fields");
           } else {
             alert("user with this name already exists");

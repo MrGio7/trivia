@@ -100,11 +100,11 @@ const Navigation = props => {
             value={user.password}
           />
 
-            <input type="submit" className="loginBtn" value="Login" />
-            
-            <Link to="/register">
+          <input type="submit" className="loginBtn" value="Login" />
+
+          <Link to="/register">
             <input type="button" className="loginBtn" value="Register" />
-            </Link>
+          </Link>
         </form>
       </div>
     ) : null;
@@ -118,16 +118,26 @@ const Navigation = props => {
 
         <div>
           <h2>Highest Score:</h2>
-          <h3>{highestScore()} </h3>
+          <h3>{[scoreList()][0].length >= 1 ? highestScore() : "NULL"} </h3>
         </div>
 
         <div>
           <h2>Last Games:</h2>
-          <h3>I) {scoreList()[0].score}</h3>
-          <h3>II) {scoreList()[1].score}</h3>
-          <h3>III) {scoreList()[2].score}</h3>
-          <h3>IV) {scoreList()[3].score}</h3>
-          <h3>V) {scoreList()[4].score}</h3>
+          <h3>
+            I) {[scoreList()][0].length >= 1 ? scoreList()[0].score : "NULL"}
+          </h3>
+          <h3>
+            II) {[scoreList()][0].length >= 2 ? scoreList()[1].score : "NULL"}
+          </h3>
+          <h3>
+            III) {[scoreList()][0].length >= 3 ? scoreList()[2].score : "NULL"}
+          </h3>
+          <h3>
+            IV) {[scoreList()][0].length >= 4 ? scoreList()[3].score : "NULL"}
+          </h3>
+          <h3>
+            V) {[scoreList()][0].length >= 5 ? scoreList()[4].score : "NULL"}
+          </h3>
         </div>
 
         <input
