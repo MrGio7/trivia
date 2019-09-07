@@ -101,7 +101,10 @@ const Navigation = props => {
           />
 
             <input type="submit" className="loginBtn" value="Login" />
+            
+            <Link to="/register">
             <input type="button" className="loginBtn" value="Register" />
+            </Link>
         </form>
       </div>
     ) : null;
