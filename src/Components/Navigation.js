@@ -67,7 +67,10 @@ const Navigation = props => {
             <h2>🅷🅾🅼🅴</h2>
           </Link>
 
-          <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+          <Link to="/top">
+            <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+          </Link>
+
           <h2>🅰🅱🅾🆄🆃</h2>
         </ul>
       </div>

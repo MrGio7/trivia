@@ -10,7 +10,8 @@ import {
   Ranking,
   Casual,
   Categories,
-  Register
+  Register,
+  TopPlayers
 } from "./Components";
 
 const App = props => {
@@ -73,7 +74,14 @@ const App = props => {
       <Route
         exact
         path="/ranking"
-        render={props => <Ranking {...props} userInfo={userInfo} ranking={ranking} setRanking={setRanking} />}
+        render={props => (
+          <Ranking
+            {...props}
+            userInfo={userInfo}
+            ranking={ranking}
+            setRanking={setRanking}
+          />
+        )}
       />
 
       <Route
@@ -102,7 +110,13 @@ const App = props => {
         )}
       />
 
-      <Route exact path='/register' component={Register} />
+      <Route
+        exact
+        path="/top"
+        render={props => <TopPlayers {...props} ranking={ranking} />}
+      />
+
+      <Route exact path="/register" component={Register} />
     </div>
   );
 };
