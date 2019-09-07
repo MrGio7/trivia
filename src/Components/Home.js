@@ -124,7 +124,7 @@ const Home = props => {
             <span className="close" onClick={difModalClose}>
               &times;
             </span>
-            <h2>Please Choose Difficulty</h2>
+            <h2>Choose Difficulty</h2>
           </div>
           <div className="modal-body">
             <input type="button" value="Easy" onClick={chooseCatDifficulty} />
@@ -143,6 +143,7 @@ const Home = props => {
             <h2>Please Choose Category</h2>
           </div>
           <div className="modal-body">
+            <div>
             <Link to="/categories">
               <input
                 type="button"
@@ -175,6 +176,9 @@ const Home = props => {
                 onClick={chooseCategory}
               />
             </Link>
+            </div>
+
+            <div>
             <Link to="/categories">
               <input
                 type="button"
@@ -207,6 +211,9 @@ const Home = props => {
                 onClick={chooseCategory}
               />
             </Link>
+            </div>
+
+            <div>
             <Link to="/categories">
               <input
                 type="button"
@@ -239,6 +246,7 @@ const Home = props => {
                 onClick={chooseCategory}
               />
             </Link>
+            </div>
           </div>
         </div>
       </div>
