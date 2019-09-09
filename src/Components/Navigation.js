@@ -61,18 +61,21 @@ const Navigation = props => {
 
   const menuPage = () => {
     return statusMenu ? (
-      <div className="navMenu">
-        <ul>
-          <Link to="/">
-            <h2>🅷🅾🅼🅴</h2>
-          </Link>
+      <div className="menu">
+        <div className="navMenu">
+          <ul>
+            <Link to="/">
+              <h2>🅷🅾🅼🅴</h2>
+            </Link>
 
-          <Link to="/top">
-            <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
-          </Link>
+            <Link to="/top">
+              <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
+            </Link>
 
-          <h2>🅰🅱🅾🆄🆃</h2>
-        </ul>
+            <h2>🅰🅱🅾🆄🆃</h2>
+          </ul>
+        </div>
+        <div className="blank" />
       </div>
     ) : null;
   };
@@ -172,8 +175,18 @@ const Navigation = props => {
     setStatusUser(!statusUser);
   };
 
+  // When the user clicks anywhere outside of the menu, close it
+
+  const closeHandler = ev => {
+    console.log(ev.target);
+    if (ev.target.className === 'blank') {
+      setStatusMenu(false);
+      setStatusUser(false);
+    }
+  };
+
   return (
-    <div className="navBar">
+    <div className="navBar" onClick={closeHandler}>
       <div className="navBtns">
         <img
           src={!statusMenu ? Closed : Opened}
