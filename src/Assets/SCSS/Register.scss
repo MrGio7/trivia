@@ -1,4 +1,6 @@
 @import "./Mixins//Button.scss";
+$mobile: 480px;
+$tablet: 1024px;
 
 .registerPage {
   display: flex;
@@ -8,6 +10,10 @@
   div {
     width: 40%;
     margin-top: 50px;
+
+    @media screen and (max-width: $mobile) {
+      width: 80%;
+    }
 
     h1 {
       font-size: 2rem;
@@ -24,6 +30,10 @@
     display: flex;
     flex-direction: column;
     width: 40%;
+
+    @media screen and (max-width: $mobile) {
+      width: 80%;
+    }
 
     input {
       margin-top: 20px;
