@@ -1,4 +1,6 @@
 @import "./Mixins/Button.scss";
+$mobile: 480px;
+$tablet: 1024px;
 
 .home {
   display: flex;
