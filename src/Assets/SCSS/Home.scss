@@ -107,6 +107,10 @@ $tablet: 1024px;
       -webkit-animation-duration: 0.6s;
       animation-name: animatezoom;
       animation-duration: 0.6s;
+
+      @media screen and (max-width: $mobile) {
+        width: 80%
+      }
     }
 
     .close {
