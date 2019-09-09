@@ -56,7 +56,7 @@ const Navigation = props => {
 
   const LogOut = () => {
     localStorage.removeItem("token");
-    props.history.push("/");
+    props.history.go();
   };
 
   const menuPage = () => {
