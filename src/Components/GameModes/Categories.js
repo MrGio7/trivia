@@ -86,6 +86,9 @@ const Categories = props => {
         }, 3000);
       } else {
         ev.target.className = "incorrect";
+        [].filter.call(document.getElementsByTagName("input"), function(input) {
+          return input.value === question.correct;
+        })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
@@ -130,6 +133,9 @@ const Categories = props => {
       }
     } else {
       if (timer === 0) {
+        [].filter.call(document.getElementsByTagName("input"), function(input) {
+          return input.value === question.correct;
+        })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
         props.history.goBack();
         alert(`Congrats, you finished this quest`);
