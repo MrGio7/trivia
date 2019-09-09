@@ -64,11 +64,11 @@ const Navigation = props => {
       <div className="menu">
         <div className="navMenu">
           <ul>
-            <Link to="/">
+            <Link to="/" onClick={linkHandler}>
               <h2>🅷🅾🅼🅴</h2>
             </Link>
 
-            <Link to="/top">
+            <Link to="/top" onClick={linkHandler}>
               <h2>🆁🅰🅽🅺🅸🅽🅶</h2>
             </Link>
 
@@ -109,7 +109,7 @@ const Navigation = props => {
 
             <input type="submit" className="loginBtn" value="Login" />
 
-            <Link to="/register">
+            <Link to="/register" onClick={linkHandler}>
               <input type="button" className="loginBtn" value="Register" />
             </Link>
           </form>
@@ -186,6 +186,13 @@ const Navigation = props => {
       setStatusUser(false);
     }
   };
+
+  // When the user clicks on link, close menu
+
+  const linkHandler = () => {
+    setStatusMenu(false);
+    setStatusUser(false);
+  }
 
   return (
     <div className="navBar" onClick={closeHandler}>

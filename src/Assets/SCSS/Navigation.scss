@@ -53,6 +53,11 @@ $tablet: 1024px;
         width: 25%;
       }
 
+      @media screen and (max-width: $mobile) {
+        animation: flipMobile 0.5s 1;
+        width: 100%;
+      }
+
       a {
         text-decoration: none;
         color: black;
@@ -66,6 +71,11 @@ $tablet: 1024px;
 
         @media screen and (max-width: $tablet) {
           font-size: 1.3rem;
+        }
+
+        @media screen and (max-width: $mobile) {
+          font-size: 2rem;
+          text-align: center;
         }
       }
     }
@@ -99,6 +109,11 @@ $tablet: 1024px;
       width: 25%;
     }
 
+    @media screen and (max-width: $mobile) {
+      animation: flipMobile 0.5s 1;
+      width: 100%;
+    }
+
 
     img {
       animation: transform 0.6s 1;
@@ -119,6 +134,10 @@ $tablet: 1024px;
 
       @media screen and (max-width: $tablet) {
         font-size: 1rem;
+      }
+
+      @media screen and (max-width: $mobile) {
+        font-size: 2rem;
       }
     }
 
@@ -177,6 +196,11 @@ $tablet: 1024px;
       width: 25%;
     }
 
+    @media screen and (max-width: $mobile) {
+      animation: flipMobile 0.5s 1;
+      width: 100%;
+    }
+
     form {
       animation: transform 0.5s 1;
       width: 80%;
@@ -207,6 +231,10 @@ $tablet: 1024px;
       @media screen and (max-width: $tablet) {
         font-size: 1rem;
       }
+
+      @media screen and (max-width: $mobile) {
+        font-size: 1.6rem;
+      }
     }
 
     .loginBtn {
@@ -225,20 +253,29 @@ $tablet: 1024px;
   }
 }
 
-@keyframes transform {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
 @keyframes flipTablet {
   from {
     width: 0;
   }
   to {
     width: 25%;
+  }
+}
+
+@keyframes flipMobile {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes transform {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }
