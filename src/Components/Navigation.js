@@ -82,36 +82,39 @@ const Navigation = props => {
 
   const loginPage = () => {
     return statusUser ? (
-      <div className="navUser">
-        <form onSubmit={loginHandler}>
-          <label>
-            <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter UserName"
-            onChange={changeHandler}
-            name="username"
-            value={user.username}
-          />
+      <div className="menu">
+        <div className="navUser">
+          <form onSubmit={loginHandler}>
+            <label>
+              <h2>🆄🆂🅴🆁🅽🅰🅼🅴:</h2>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter UserName"
+              onChange={changeHandler}
+              name="username"
+              value={user.username}
+            />
 
-          <label>
-            <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
-          </label>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={changeHandler}
-            name="password"
-            value={user.password}
-          />
+            <label>
+              <h2>🅿🅰🆂🆂🆆🅾🆁🅳:</h2>
+            </label>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={changeHandler}
+              name="password"
+              value={user.password}
+            />
 
-          <input type="submit" className="loginBtn" value="Login" />
+            <input type="submit" className="loginBtn" value="Login" />
 
-          <Link to="/register">
-            <input type="button" className="loginBtn" value="Register" />
-          </Link>
-        </form>
+            <Link to="/register">
+              <input type="button" className="loginBtn" value="Register" />
+            </Link>
+          </form>
+        </div>
+        <div className="blank" />
       </div>
     ) : null;
   };
@@ -178,8 +181,7 @@ const Navigation = props => {
   // When the user clicks anywhere outside of the menu, close it
 
   const closeHandler = ev => {
-    console.log(ev.target);
-    if (ev.target.className === 'blank') {
+    if (ev.target.className === "blank") {
       setStatusMenu(false);
       setStatusUser(false);
     }
