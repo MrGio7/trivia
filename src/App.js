@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 import "./Assets/SCSS/App.scss";
@@ -11,10 +11,10 @@ import {
   Casual,
   Categories,
   Register,
-  TopPlayers
+  TopPlayers,
 } from "./Components";
 
-const App = props => {
+const App = (props) => {
   const [userInfo, setUserInfo] = useState(null);
   const [ranking, setRanking] = useState([{ score: "", user: "" }]);
   const [difficulty, setDifficulty] = useState("");
@@ -26,12 +26,12 @@ const App = props => {
   useEffect(() => {
     axios
       .get(`https://trivia-app-server.herokuapp.com/api/users/user`, {
-        headers: { token: localStorage.token }
+        headers: { token: localStorage.token },
       })
-      .then(res => {
+      .then((res) => {
         setUserInfo(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
@@ -40,85 +40,21 @@ const App = props => {
   useEffect(() => {
     axios
       .get(`https://trivia-app-server.herokuapp.com/api/score/ranking`)
-      .then(res => {
+      .then((res) => {
         setRanking(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  return (
-    <div className="app">
-      <Route
-        path="/"
-        render={props => (
-          <Navigation {...props} userInfo={userInfo} ranking={ranking} />
-        )}
-      />
-
-      <Route
-        exact
-        path="/"
-        render={props => (
-          <Home
-            {...props}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            category={category}
-            setCategory={setCategory}
-          />
-        )}
-      />
-
-      <Route
-        exact
-        path="/ranking"
-        render={props => (
-          <Ranking
-            {...props}
-            userInfo={userInfo}
-            ranking={ranking}
-            setRanking={setRanking}
-          />
-        )}
-      />
-
-      <Route
-        exact
-        path="/casual"
-        render={props => (
-          <Casual
-            {...props}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-          />
-        )}
-      />
-
-      <Route
-        exact
-        path="/categories"
-        render={props => (
-          <Categories
-            {...props}
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            category={category}
-            setCategory={setCategory}
-          />
-        )}
-      />
-
-      <Route
-        exact
-        path="/top"
-        render={props => <TopPlayers {...props} ranking={ranking} />}
-      />
-
-      <Route exact path="/register" component={Register} />
+  return ( 
+    <div className="App">
+      <Navigation userInfo={userInfo} ranking={ranking}/>
+      <Outlet />
     </div>
-  );
+
+  )
 };
 
 export default App;
