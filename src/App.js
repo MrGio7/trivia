@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import axios from "axios";
 
 import "./Assets/SCSS/App.scss";
@@ -14,13 +14,11 @@ import {
   TopPlayers,
 } from "./Components";
 
-const App = (props) => {
+const App = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [ranking, setRanking] = useState([{ score: "", user: "" }]);
   const [difficulty, setDifficulty] = useState("");
   const [category, setCategory] = useState("");
-
-  console.log(ranking);
 
   // getting logged in user data
   useEffect(() => {
@@ -51,7 +49,7 @@ const App = (props) => {
   return ( 
     <div className="App">
       <Navigation userInfo={userInfo} ranking={ranking}/>
-      <Outlet />
+      <Outlet context={[userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory]} />
     </div>
 
   )

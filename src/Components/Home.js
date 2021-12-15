@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import "../Assets/SCSS/Home.scss";
 
-const Home = props => {
-
+const Home = () => {
+  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
+  
   //  Casual Handler
 
   const modalBtnHandler = ev => {
@@ -20,7 +21,7 @@ const Home = props => {
   };
 
   const chooseDifficulty = ev => {
-    props.setDifficulty(ev.target.value.toLowerCase());
+    setDifficulty(ev.target.value.toLowerCase());
   };
 
   // Casual Handler END
@@ -36,7 +37,7 @@ const Home = props => {
   const chooseCatDifficulty = ev => {
     ev.preventDefault();
 
-    props.setDifficulty(ev.target.value.toLowerCase());
+    setDifficulty(ev.target.value.toLowerCase());
 
     const modal = document.getElementsByClassName("categoryDifModal")[0];
     const catModal = document.getElementsByClassName("categoryModal")[0];
@@ -46,7 +47,7 @@ const Home = props => {
   }
 
   const chooseCategory = ev => {
-    props.setCategory(ev.target.id)
+    setCategory(ev.target.id)
   }
 
   const difModalClose = ev => {

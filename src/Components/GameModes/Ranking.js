@@ -3,8 +3,10 @@ import axios from "axios";
 import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
+import { useOutletContext } from "react-router-dom";
 
-const Ranking = props => {
+const Ranking = () => {
+  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -48,7 +50,7 @@ const Ranking = props => {
   }, []);
 
   const scoreDeployHandler = () => {
-    const userScore = { score: score, id_user: props.userInfo.id };
+    const userScore = { score: score, id_user: userInfo.id };
 
     axios
       .post(`https://trivia-app-server.herokuapp.com/api/score/add`, userScore)
@@ -81,8 +83,8 @@ const Ranking = props => {
         setTimer(4);
         scoreDeployHandler();
         setTimeout(() => {
-          props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
-          props.history.goBack();
+          setRanking([...ranking, {user: userInfo.user, score: score}]);
+          history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
       }
@@ -111,8 +113,8 @@ const Ranking = props => {
         setTimer(4);
         scoreDeployHandler();
         setTimeout(() => {
-          props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
-          props.history.goBack();
+          setRanking([...ranking, {user: userInfo.user, score: score}]);
+          history.goBack();
           alert(`Congrats, your score is ${score}`);
         }, 3000);
       }
@@ -158,8 +160,8 @@ const Ranking = props => {
           return input.value === question.correct;
         })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
-        props.setRanking([...props.ranking, {user: props.userInfo.user, score: score}]);
-        props.history.goBack();
+        setRanking([...ranking, {user: userInfo.user, score: score}]);
+        history.goBack();
         alert(`Congrats, your score is ${score}`);
       }
     }
@@ -168,7 +170,7 @@ const Ranking = props => {
   // Ranking Component
 
   const rankingComponent = () => {
-    if (!props.userInfo) {
+    if (!userInfo) {
       return <div className="warning">
         <h1>Please Log In first</h1>
       </div>

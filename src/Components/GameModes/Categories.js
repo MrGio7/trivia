@@ -3,8 +3,10 @@ import axios from "axios";
 import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Categories.scss";
+import { useOutletContext } from "react-router-dom";
 
-const Categories = props => {
+const Categories = () => {
+  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -21,7 +23,7 @@ const Categories = props => {
   useEffect(() => {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=20&category=${props.category}&difficulty=${props.difficulty}&type=multiple`
+        `https://opentdb.com/api.php?amount=20&category=${category}&difficulty=${difficulty}&type=multiple`
       )
       .then(res => {
         const filteredQuestions = res.data.results.map(each => {
@@ -64,7 +66,7 @@ const Categories = props => {
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
-          props.history.goBack();
+          history.goBack();
           alert(`Congrats, you finished this quest `);
         }, 3000);
       }
@@ -92,7 +94,7 @@ const Categories = props => {
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
-          props.history.goBack();
+          history.goBack();
           alert(`Congrats, you finished this quest`);
         }, 3000);
       }
@@ -137,7 +139,7 @@ const Categories = props => {
           return input.value === question.correct;
         })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
-        props.history.goBack();
+        history.goBack();
         alert(`Congrats, you finished this quest`);
       }
     }

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import axios from "axios";
 import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Casual.scss";
 
-const Casual = props => {
+const Casual = () => {
+  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],
@@ -17,7 +19,6 @@ const Casual = props => {
   const [loader, setLoader] = useState(true);
 
   const question = questions[0];
-  const difficulty = props.difficulty;
 
   useEffect(() => {
     axios
@@ -65,7 +66,7 @@ const Casual = props => {
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
-          props.history.goBack();
+          history.goBack();
           alert(`Congrats, you finished this quest `);
         }, 3000);
       }
@@ -93,7 +94,7 @@ const Casual = props => {
         document.getElementsByClassName("overly")[0].className = "overly cover";
         setTimer(4);
         setTimeout(() => {
-          props.history.goBack();
+          history.goBack();
           alert(`Congrats, you finished this quest`);
         }, 3000);
       }
@@ -138,7 +139,7 @@ const Casual = props => {
           return input.value === question.correct;
         })[0].className = "correct";
         document.getElementsByClassName("overly")[0].className = "overly cover";
-        props.history.goBack();
+        history.goBack();
         alert(`Congrats, you finished this quest`);
       }
     }

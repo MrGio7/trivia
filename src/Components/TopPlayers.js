@@ -1,9 +1,12 @@
 import React from "react";
+import { useOutletContext } from "react-router-dom";
 
 import "../Assets/SCSS/TopPlayers.scss";
 
-const TopPlayers = props => {
-  let mapped = props.ranking.map(each => each);
+const TopPlayers = () => {
+  const [userInfo, ranking] = useOutletContext();
+
+  let mapped = ranking.map(each => each);
 
   let sorted = mapped.sort((a, b) => b.score - a.score);
 

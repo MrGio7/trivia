@@ -8,15 +8,15 @@ import Closed from "../Assets/Img/hamburger-closed.png";
 import Opened from "../Assets/Img/hamburger-opened.png";
 import UserLogo from "../Assets/Img/user.png";
 
-const Navigation = props => {
+const Navigation = ({userInfo, ranking}) => {
   const [statusMenu, setStatusMenu] = useState(false);
   const [statusUser, setStatusUser] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
 
   const scoreList = () => {
-    const scores = props.ranking.map(each => each);
+    const scores = ranking.map(each => each);
     const filteredScore = scores.filter(
-      each => each.user === props.userInfo.user
+      each => each.user === userInfo.user
     );
     const reversed = filteredScore.reverse();
 
@@ -46,7 +46,7 @@ const Navigation = props => {
         console.log(res.data);
         setStatusUser(false);
         localStorage.setItem("token", res.data.token);
-        props.history.go();
+        history.go();
       })
       .catch(err => {
         console.log(err);
@@ -56,7 +56,7 @@ const Navigation = props => {
 
   const LogOut = () => {
     localStorage.removeItem("token");
-    props.history.go();
+    history.go();
   };
 
   const menuPage = () => {
@@ -122,8 +122,8 @@ const Navigation = props => {
   const userPage = () => {
     return statusUser ? (
       <div className="userPage">
-        <img src={props.userInfo.img} alt="user" />
-        <h2>Welcome {props.userInfo.user}</h2>
+        <img src={userInfo.img} alt="user" />
+        <h2>Welcome {userInfo.user}</h2>
 
         <div>
           <h2>Highest Score:</h2>
@@ -163,7 +163,7 @@ const Navigation = props => {
     return (
       <div className="navOpened">
         {menuPage()}
-        {!localStorage.token || !props.userInfo ? loginPage() : userPage()}
+        {!localStorage.token || !userInfo ? loginPage() : userPage()}
       </div>
     );
   };
