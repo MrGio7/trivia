@@ -6,7 +6,7 @@ import "../../Assets/SCSS/Ranking.scss";
 import { useOutletContext } from "react-router-dom";
 
 const Ranking = () => {
-  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
+  const [userInfo, ranking, setRanking] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],

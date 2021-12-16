@@ -6,7 +6,7 @@ import "../../Assets/SCSS/Categories.scss";
 import { useOutletContext } from "react-router-dom";
 
 const Categories = () => {
-  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
+  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],

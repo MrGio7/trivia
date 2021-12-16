@@ -1,3 +1,6 @@
+@use "./variables" as *;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -14,8 +17,8 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
+	font-family: 'Roboto', sans-serif;
+	font-size: 62.5%;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -48,15 +51,17 @@ table {
 
 body{
 	height: 100vh;
+	background-color: black;
+
+	#root{
+		height: 100%;
+		width: 100%;
+		
+		.app {
+			height: 100%;
+			width: 100%;
+		}
+	}
+	
 }
 
-#root{
-	height: 100%;
-	width: 100%;
-}
-
-.app {
-    background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-	height: 100%;
-	width: 100%;
-}

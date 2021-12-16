@@ -6,7 +6,7 @@ import { decodeHTML } from "entities";
 import "../../Assets/SCSS/Casual.scss";
 
 const Casual = () => {
-  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
+  const difficulty = useOutletContext()[3];
   const [questions, setQuestions] = useState([
     {
       answers: [],
