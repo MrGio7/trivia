@@ -7,7 +7,7 @@
   width: 100%;
   height: 60px;
   padding:10px;
-  background-color: $persian-green;
+  background-image: linear-gradient(135deg, $persian-green, $charcoal, $persian-green);
 
   .navBtns {
     display: flex;
@@ -17,7 +17,7 @@
     svg {
       cursor: pointer;
       font-size: 4rem;
-      color: black;
+      color: $black;
     }
   }
 
@@ -34,14 +34,14 @@
       top: 60px;
       left: 0;
       z-index: 2;
-      background-color: $persian-green;
+      background-image: linear-gradient(135deg, $persian-green, $charcoal);
       border-radius: 0 0 10px 0;
       
       a {
         text-decoration: none;
         font-size: 1.8rem;
         font-weight: bold;
-        color: black;
+        color: $black;
         padding:20px 10px;
       }
 
@@ -62,7 +62,7 @@
       top:60px;
       right: 0px;
       z-index: 2;
-      background-color: $persian-green;
+      background-image: linear-gradient(225deg, $persian-green, $charcoal);
       border-radius: 0 0 0 10px;
 
       form {
@@ -92,7 +92,7 @@
         a {
           text-decoration: none;
           width: 100%;
-          color: black;
+          color: $black;
           padding-bottom: 10px;
         }
       }
@@ -127,7 +127,7 @@
       }
   
       .logoutBtn {
-        background-color: #ff0000;
+        background-color: $burnt-sienna;
         cursor: pointer;
         border: none;
         border-radius: 5px;

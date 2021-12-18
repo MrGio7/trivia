@@ -1,156 +1,160 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 
+import useComponentVisible from "../hooks/useComponentVisible";
+
 import "../Assets/SCSS/Home.scss";
 
 const Home = () => {
-  const [userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory] = useOutletContext();
-  
-  //  Casual Handler
+  const setDifficulty = useOutletContext()[4];
+  const setCategory = useOutletContext()[6];
 
-  const modalBtnHandler = ev => {
-    ev.preventDefault();
-    const modal = document.getElementsByClassName("casualModal")[0];
-    modal.style.display = "block";
-  };
-
-  const modalCloseHandler = ev => {
-    ev.preventDefault();
-    const modal = document.getElementsByClassName("casualModal")[0];
-    modal.style.display = "none";
-  };
-
-  const chooseDifficulty = ev => {
-    setDifficulty(ev.target.value.toLowerCase());
-  };
-
-  // Casual Handler END
-
-  // Category Handler
-
-  const categoryModalBtn = ev => {
-    ev.preventDefault();
-    const modal = document.getElementsByClassName("categoryDifModal")[0];
-    modal.style.display = "block";
-  }
-
-  const chooseCatDifficulty = ev => {
-    ev.preventDefault();
-
-    setDifficulty(ev.target.value.toLowerCase());
-
-    const modal = document.getElementsByClassName("categoryDifModal")[0];
-    const catModal = document.getElementsByClassName("categoryModal")[0];
-
-    modal.style.display = "none";
-    catModal.style.display = "block";
-  }
-
-  const chooseCategory = ev => {
-    setCategory(ev.target.id)
-  }
-
-  const difModalClose = ev => {
-    ev.preventDefault();
-    const modal = document.getElementsByClassName("categoryDifModal")[0];
-    modal.style.display = "none";
-  };
-
-  const catModalClose = ev => {
-    ev.preventDefault();
-    const modal = document.getElementsByClassName("categoryModal")[0];
-    modal.style.display = "none";
-  };
-
-    // Category Handler END
-  
+  const casModal = useComponentVisible(false);
+  const catDifModal = useComponentVisible(false);
+  const catCatModal = useComponentVisible(false);
 
   return (
     <div className="home">
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s
+        By answering questions and learning, you're improving your cognitive
+        skills. Retaining information about topics you're interested in is like
+        an exercise for your mind, allowing you to expand your intelligence and
+        improve mental capabilities. This leads to greater creativity,
+        innovation and problem-solving skills.
       </p>
 
       {/* Ranking */}
 
       <Link to="/ranking">
         <button className="button">
-          <span>Ranking </span>
+          <span>Ranking</span>
         </button>
       </Link>
 
-       {/* Ranking END */}
+      {/* Ranking END */}
 
       {/* Casual */}
 
-      <button className="button" onClick={modalBtnHandler}>
-        <span>Casual </span>
+      <button
+        className="button"
+        onClick={() => casModal.setIsComponentVisible(true)}
+      >
+        <span>Casual</span>
       </button>
 
-      <div className="casualModal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <span className="close" onClick={modalCloseHandler}>
-              &times;
-            </span>
-            <h2>Choose Difficulty</h2>
-          </div>
-          <div className="modal-body">
-            <Link to="/casual">
-              <input type="button" value="Easy" onClick={chooseDifficulty} />
-            </Link>
-            <Link to="/casual">
-              <input type="button" value="Medium" onClick={chooseDifficulty} />
-            </Link>
-            <Link to="/casual">
-              <input type="button" value="Hard" onClick={chooseDifficulty} />
-            </Link>
-          </div>
+      <div
+        ref={casModal.ref}
+        className={casModal.isComponentVisible ? "modal opened" : "modal"}
+      >
+        <div className="modal-header">
+          <span
+            className="close"
+            onClick={() => casModal.setIsComponentVisible(false)}
+          >
+            &times;
+          </span>
+          <h2>Choose Difficulty</h2>
+        </div>
+        <div className="modal-body">
+          <Link to="/casual">
+            <input
+              type="button"
+              value="Easy"
+              onClick={(ev) => setDifficulty(ev.target.value.toLowerCase())}
+            />
+          </Link>
+          <Link to="/casual">
+            <input
+              type="button"
+              value="Medium"
+              onClick={(ev) => setDifficulty(ev.target.value.toLowerCase())}
+            />
+          </Link>
+          <Link to="/casual">
+            <input
+              type="button"
+              value="Hard"
+              onClick={(ev) => setDifficulty(ev.target.value.toLowerCase())}
+            />
+          </Link>
         </div>
       </div>
 
       {/* Casual END */}
 
-{/* Select Category */}
+      {/* Select Category */}
 
-      <button className="button" onClick={categoryModalBtn}>
+      <button
+        className="button"
+        onClick={() => catDifModal.setIsComponentVisible(true)}
+      >
         <span>Select Category</span>
       </button>
 
-      <div className="categoryDifModal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <span className="close" onClick={difModalClose}>
-              &times;
-            </span>
-            <h2>Choose Difficulty</h2>
-          </div>
-          <div className="modal-body">
-            <input type="button" value="Easy" onClick={chooseCatDifficulty} />
-            <input type="button" value="Medium" onClick={chooseCatDifficulty} />
-            <input type="button" value="Hard" onClick={chooseCatDifficulty} />
-          </div>
+      <div
+        ref={catDifModal.ref}
+        className={catDifModal.isComponentVisible ? "modal opened" : "modal"}
+      >
+        <div className="modal-header">
+          <span
+            className="close"
+            onClick={() => catDifModal.setIsComponentVisible(false)}
+          >
+            &times;
+          </span>
+          <h2>Choose Difficulty</h2>
+        </div>
+        <div className="modal-body">
+          <input
+            type="button"
+            value="Easy"
+            onClick={(ev) => {
+              setDifficulty(ev.target.value.toLowerCase());
+              catDifModal.setIsComponentVisible(false);
+              catCatModal.setIsComponentVisible(true);
+            }}
+          />
+          <input
+            type="button"
+            value="Medium"
+            onClick={(ev) => {
+              setDifficulty(ev.target.value.toLowerCase());
+              catDifModal.setIsComponentVisible(false);
+              catCatModal.setIsComponentVisible(true);
+            }}
+          />
+          <input
+            type="button"
+            value="Hard"
+            onClick={(ev) => {
+              setDifficulty(ev.target.value.toLowerCase());
+              catDifModal.setIsComponentVisible(false);
+              catCatModal.setIsComponentVisible(true);
+            }}
+          />
         </div>
       </div>
 
-      <div className="categoryModal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <span className="close" onClick={catModalClose}>
-              &times;
-            </span>
-            <h2>Please Choose Category</h2>
-          </div>
-          <div className="modal-body">
-            <div>
+      <div
+        ref={catCatModal.ref}
+        className={catCatModal.isComponentVisible ? "modal opened" : "modal"}
+      >
+        <div className="modal-header">
+          <span
+            className="close"
+            onClick={() => catCatModal.setIsComponentVisible(false)}
+          >
+            &times;
+          </span>
+          <h2>Please Choose Category</h2>
+        </div>
+        <div className="modal-body categories">
             <Link to="/categories">
               <input
                 type="button"
                 value="Films"
                 id="11"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -158,7 +162,7 @@ const Home = () => {
                 type="button"
                 value="Music"
                 id="12"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -166,7 +170,7 @@ const Home = () => {
                 type="button"
                 value="Celebrities"
                 id="26"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -174,18 +178,16 @@ const Home = () => {
                 type="button"
                 value="Vehicles"
                 id="28"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
-            </div>
 
-            <div>
             <Link to="/categories">
               <input
                 type="button"
                 value="Sports"
                 id="21"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -193,7 +195,7 @@ const Home = () => {
                 type="button"
                 value="Anime/Manga"
                 id="31"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -201,7 +203,7 @@ const Home = () => {
                 type="button"
                 value="Cartoon/Animations"
                 id="32"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -209,18 +211,16 @@ const Home = () => {
                 type="button"
                 value="Mathematics"
                 id="19"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
-            </div>
 
-            <div>
             <Link to="/categories">
               <input
                 type="button"
                 value="Geography"
                 id="22"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -228,7 +228,7 @@ const Home = () => {
                 type="button"
                 value="Art"
                 id="25"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -236,7 +236,7 @@ const Home = () => {
                 type="button"
                 value="History"
                 id="23"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
             <Link to="/categories">
@@ -244,11 +244,9 @@ const Home = () => {
                 type="button"
                 value="Mythology"
                 id="20"
-                onClick={chooseCategory}
+                onClick={(ev) => setCategory(ev.target.id)}
               />
             </Link>
-            </div>
-          </div>
         </div>
       </div>
 
