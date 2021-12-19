@@ -1,50 +1,49 @@
-@import "./Mixins//Button.scss";
-$mobile: 480px;
-$tablet: 1024px;
+@use "./Mixins//Button.scss" as *;
+@use "./variables" as *;
 
 .registerPage {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  padding: 15px 5%;
 
-  div {
-    width: 40%;
-    margin-top: 50px;
+  background-image: linear-gradient(135deg, $persian-green, $charcoal);
+  border-radius: 10px;
 
-    @media screen and (max-width: $mobile) {
-      width: 80%;
-    }
+  h1{
+    color: $black;
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 10px;
-    }
+  h2{
+    color: $black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    width: 40%;
-
-    @media screen and (max-width: $mobile) {
-      width: 80%;
-    }
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
     input {
-      margin-top: 20px;
-      margin-bottom: 15px;
-      padding: 10px 20px;
+      margin: 10px 0 5px 0;
+      padding: 10px 5%;
+      background-color: $black;
+      color: $white;
+      border-radius: 5px;
     }
 
     input[type="submit"] {
-      @include btn(green);
-      width: 50%;
-      margin: 0 auto;
+      @include btn($black);
+      width: 70%;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
   }
 }

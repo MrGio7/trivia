@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import "../Assets/SCSS/Register.scss";
 
 const Register = () => {
-  const [user, setUser] = useState({
+  let navigate = useNavigate();
+  let user = {
     username: "",
     password: "",
     img:
       "https://cdn2.iconfinder.com/data/icons/user-icon-2-1/100/user_5-15-512.png",
     repeat: ""
-  });
+  }
 
   const changeHandler = ev => {
     ev.persist();
-    setUser(user => ({
+    user = {
       ...user,
       [ev.target.name]: ev.target.value
-    }));
+    }
   };
 
   const registerHandler = ev => {
     ev.preventDefault();
-
+    
     if (user.password === user.repeat && user.password !== "") {
       axios
         .post(`https://trivia-app-server.herokuapp.com/api/users/register`, {
@@ -32,16 +34,8 @@ const Register = () => {
         })
         .then(res => {
           console.log(res.data);
-          setUser({
-            username: "",
-            password: "",
-            img:
-              "https://cdn2.iconfinder.com/data/icons/user-icon-2-1/100/user_5-15-512.png",
-            repeat: ""
-          });
-          alert(
-            `Congrats U have succesfully registered, please log in and enjoy the game`
-          );
+          alert(`Congrats U have succesfully registered, please log in and enjoy the game`);
+          navigate("/", {replace: true})
         })
         .catch(err => {
           if (!user.username && !user.password && !user.img) {
@@ -57,17 +51,15 @@ const Register = () => {
 
   return (
     <div className="registerPage">
-      <div>
-        <h1>Sign Up</h1>
-        <h2>It’s quick and easy.</h2>
-      </div>
+      <h1>Sign Up</h1>
+      <h2>It`s quick and easy.</h2>
 
       <form onSubmit={registerHandler}>
         <input
           type="text"
           placeholder="UserName"
           name="username"
-          value={user.username}
+          defaultValue={user.username}
           onChange={changeHandler}
         />
 
@@ -75,7 +67,7 @@ const Register = () => {
           type="text"
           placeholder="User image address"
           name="img"
-          value={user.img}
+          defaultValue={user.img}
           onChange={changeHandler}
         />
 
@@ -83,7 +75,7 @@ const Register = () => {
           type="password"
           placeholder="Password"
           name="password"
-          value={user.password}
+          defaultValue={user.password}
           onChange={changeHandler}
         />
 
@@ -91,7 +83,7 @@ const Register = () => {
           type="password"
           placeholder="Repeat password"
           name="repeat"
-          value={user.repeat}
+          defaultValue={user.repeat}
           onChange={changeHandler}
         />
 

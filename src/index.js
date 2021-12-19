@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App";
 import {
@@ -13,7 +13,7 @@ import {
 } from "./Components";
 
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter basename="/trivia">
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
@@ -24,6 +24,6 @@ ReactDOM.render(
         <Route path="register" element={<Register />} />
       </Route>
     </Routes>
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
