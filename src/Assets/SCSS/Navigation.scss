@@ -19,6 +19,12 @@
       font-size: 4rem;
       color: $black;
     }
+
+    .userOpened{
+      color: $persian-green;
+      background-color: $black;
+      border-radius: 50%;
+    }
   }
 
   .menu {
@@ -86,14 +92,15 @@
         }
     
         .loginBtn {
-          @include btn(green);
+          @include btn($black);
+          font-size: 1.5rem;
         }
         
         a {
           text-decoration: none;
           width: 100%;
           color: $black;
-          padding-bottom: 10px;
+          margin-bottom: 10px;
         }
       }
   
