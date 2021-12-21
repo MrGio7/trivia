@@ -4,20 +4,21 @@ import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 import { useOutletContext } from "react-router-dom";
+import useTimer from "../../hooks/useTimer";
 
 const Ranking = () => {
-  const [userInfo, ranking, setRanking] = useOutletContext();
+  const [userInfo] = useOutletContext();
   const [questions, setQuestions] = useState([
     {
       answers: [],
       category: "",
       correct: "",
-      question: ""
-    }
+      question: "",
+    },
   ]);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(20);
   const [loader, setLoader] = useState(true);
+  const {timer, setTimer} = useTimer(20);
 
   const question = questions[0];
 
@@ -26,186 +27,127 @@ const Ranking = () => {
       .get(
         `https://opentdb.com/api.php?amount=20&difficulty=hard&type=multiple`
       )
-      .then(res => {
-        const filteredQuestions = res.data.results.map(each => {
+      .then((res) => {
+        const filteredQuestions = res.data.results.map((each) => {
           each.incorrect_answers.push(each.correct_answer);
-          each.incorrect_answers.sort(
-            (elem1, elem2) => Math.random() - Math.random()
-          );
+          each.incorrect_answers.sort(() => Math.random() - Math.random());
 
           return {
             category: each.category,
             question: decodeHTML(each.question),
-            answers: each.incorrect_answers.map(each => decodeHTML(each)),
-            correct: decodeHTML(each.correct_answer)
+            answers: each.incorrect_answers.map((each) => decodeHTML(each)),
+            correct: decodeHTML(each.correct_answer),
           };
         });
 
         setQuestions(filteredQuestions);
         setLoader(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (timer === 0) {
+      if(questions.length > 1) {
+        setQuestions(questions.slice(1));
+        setTimer(20);
+      } else {
+        scoreDeployHandler();
+        alert(`Congrats, your score is ${score}`);
+        location.replace("/trivia");
+      }
+    }
+  }, [timer])
 
   const scoreDeployHandler = () => {
     const userScore = { score: score, id_user: userInfo.id };
 
     axios
       .post(`https://trivia-app-server.herokuapp.com/api/score/add`, userScore)
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  const answerHandler = ev => {
+  const answerHandler = (ev) => {
     if (ev.target.value === question.correct) {
-      if (questions.length !== 1) {
+      if (questions.length > 1) {
         ev.target.className = "correct";
-        document.getElementsByClassName("overly")[0].className = "overly cover";
+        ev.target.parentElement.className = 'answers locked'
         setScore(score + 100 * timer);
-        setTimer(4);
+        setTimer(3);
         setTimeout(() => {
-          questions.shift();
-          setQuestions([...questions]);
+          setQuestions(questions.slice(1));
           setTimer(20);
-          document.getElementsByClassName("correct")[0].className = "";
-          document.getElementsByClassName("overly")[0].className = "overly";
+          ev.target.className = "";
+          ev.target.parentElement.className = 'answers'
         }, 3000);
       } else {
         ev.target.className = "correct";
-        document.getElementsByClassName("overly")[0].className = "overly cover";
+        ev.target.parentElement.className = 'answers locked'
         setScore(score + 100 * timer);
-        setTimer(4);
-        scoreDeployHandler();
-        setTimeout(() => {
-          setRanking([...ranking, {user: userInfo.user, score: score}]);
-          history.goBack();
-          alert(`Congrats, your score is ${score}`);
-        }, 3000);
+        setTimer(3);
       }
     } else {
-      if (questions.length !== 1) {
+      if (questions.length > 1) {
         ev.target.className = "incorrect";
-        [].filter.call(document.getElementsByTagName("input"), function(input) {
-          return input.value === question.correct;
-        })[0].className = "correct";
-        document.getElementsByClassName("overly")[0].className = "overly cover";
-        setTimer(4);
+        ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.value === question.correct && (currentValue.className = "correct"));
+        ev.target.parentElement.className = 'answers locked'
+        
+        setTimer(3);
         setTimeout(() => {
-          questions.shift();
-          setQuestions([...questions]);
+          setQuestions(questions.slice(1));
           setTimer(20);
-          document.getElementsByClassName("incorrect")[0].className = "";
-          document.getElementsByClassName("correct")[0].className = "";
-          document.getElementsByClassName("overly")[0].className = "overly";
+          ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.className = "");
+          ev.target.parentElement.className = 'answers'
         }, 3000);
       } else {
         ev.target.className = "incorrect";
-        [].filter.call(document.getElementsByTagName("input"), function(input) {
-          return input.value === question.correct;
-        })[0].className = "correct";
-        document.getElementsByClassName("overly")[0].className = "overly cover";
-        setTimer(4);
-        scoreDeployHandler();
-        setTimeout(() => {
-          setRanking([...ranking, {user: userInfo.user, score: score}]);
-          history.goBack();
-          alert(`Congrats, your score is ${score}`);
-        }, 3000);
+        ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.value === question.correct && (currentValue.className = "correct"));
+        ev.target.parentElement.className = 'answers locked'
+        setTimer(3);
       }
     }
   };
 
-  // Timer useInterval Function
-
-  function useInterval(callback, delay) {
-    const savedCallback = useRef();
-
-    // Remember the latest function.
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    // Set up the interval.
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  }
-
-  // Setting up timer
-
-  useInterval(() => {
-    setTimer(timer - 1);
-    if (questions.length !== 1) {
-      if (timer === 0) {
-        questions.shift();
-        setQuestions([...questions]);
-        setTimer(20);
-      }
-    } else {
-      if (timer === 0) {
-        scoreDeployHandler();
-        [].filter.call(document.getElementsByTagName("input"), function(input) {
-          return input.value === question.correct;
-        })[0].className = "correct";
-        document.getElementsByClassName("overly")[0].className = "overly cover";
-        setRanking([...ranking, {user: userInfo.user, score: score}]);
-        history.goBack();
-        alert(`Congrats, your score is ${score}`);
-      }
-    }
-  }, 1000);
-
-  // Ranking Component
-
-  const rankingComponent = () => {
-    if (!userInfo) {
-      return <div className="warning">
-        <h1>Please Log In first</h1>
+  return loader ? (
+    <div className="loader" />
+  ) : !userInfo ? (
+    <div className="warning">
+      <h1>Please Log In first</h1>
+    </div>
+  ) : (
+    <div className="ranking">
+      <h3>SCORE: {score}</h3>
+      <div className="category">
+        <h2>{question.category}</h2>
+        <h2>{timer}</h2>
       </div>
-    } else {
-      return (
-        <div className="ranking">
-          <h3>SCORE: {score}</h3>
-          <div className="category">
-            <h2>{question.category}</h2>
-            <h2>{timer}</h2>
-          </div>
 
-          <div className="question">
-            <p>{question.question} </p>
-          </div>
+      <div className="question">
+        <p>{question.question} </p>
+      </div>
 
-          <div className="answers">
-            <div className="overly" />
-            {question.answers.map((object, index) => {
-              return (
-                <input
-                  key={index}
-                  type="button"
-                  value={object}
-                  onClick={answerHandler}
-                />
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-  };
-
-  return loader ? <div className="loader" /> : rankingComponent();
+      <div className="answers">
+        {question.answers.map((object, index) => {
+          return (
+            <input
+              key={index}
+              id={object}
+              type="button"
+              value={object}
+              onClick={answerHandler}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default Ranking;

@@ -120,7 +120,7 @@ const Navigation = ({ userInfo, ranking }) => {
             </form>
           </div>
         ) : (
-          <div className={statusUser ? "userPage opened" : "userPage"}>
+          <div ref={statusUserRef} className={statusUser ? "userPage opened" : "userPage"}>
             <img src={userInfo.img} alt="user" />
             <h2>Welcome {userInfo.user}</h2>
 

@@ -1,5 +1,4 @@
-$mobile: 480px;
-$tablet: 1024px;
+@use "./variables" as *;
 
 .loader {
   border: 16px solid #f3f3f3;
@@ -85,15 +84,16 @@ $tablet: 1024px;
     justify-content: space-around;
     flex-wrap: wrap;
 
+    &.locked{
+      pointer-events: none;
+    }
+
     @media screen and (max-width: $mobile) {
       flex-direction: column;
       width: 90%;
       margin: 0 auto;
     }
-    
-    .overly{
-      position: absolute;
-    }
+  
 
     input {
       white-space: normal;
