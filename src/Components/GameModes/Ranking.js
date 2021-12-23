@@ -1,52 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { decodeHTML } from "entities";
 
 import "../../Assets/SCSS/Ranking.scss";
 import { useOutletContext } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
+import useQuestionList from "../../hooks/useQuestionList";
+import useAnswerHandler from "../../hooks/answerHandler";
 
 const Ranking = () => {
-  const [userInfo] = useOutletContext();
-  const [questions, setQuestions] = useState([
-    {
-      answers: [],
-      category: "",
-      correct: "",
-      question: "",
-    },
-  ]);
-  const [score, setScore] = useState(0);
-  const [loader, setLoader] = useState(true);
+  const userInfo = useOutletContext()[0];
+  const {questions, setQuestions, question, loader} = useQuestionList(20, "hard", "");
   const {timer, setTimer} = useTimer(20);
-
-  const question = questions[0];
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://opentdb.com/api.php?amount=20&difficulty=hard&type=multiple`
-      )
-      .then((res) => {
-        const filteredQuestions = res.data.results.map((each) => {
-          each.incorrect_answers.push(each.correct_answer);
-          each.incorrect_answers.sort(() => Math.random() - Math.random());
-
-          return {
-            category: each.category,
-            question: decodeHTML(each.question),
-            answers: each.incorrect_answers.map((each) => decodeHTML(each)),
-            correct: decodeHTML(each.correct_answer),
-          };
-        });
-
-        setQuestions(filteredQuestions);
-        setLoader(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const {answerHandler, score} = useAnswerHandler(question, timer, setTimer);
 
   useEffect(() => {
     if (timer === 0) {
@@ -72,47 +37,6 @@ const Ranking = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const answerHandler = (ev) => {
-    if (ev.target.value === question.correct) {
-      if (questions.length > 1) {
-        ev.target.className = "correct";
-        ev.target.parentElement.className = 'answers locked'
-        setScore(score + 100 * timer);
-        setTimer(3);
-        setTimeout(() => {
-          setQuestions(questions.slice(1));
-          setTimer(20);
-          ev.target.className = "";
-          ev.target.parentElement.className = 'answers'
-        }, 3000);
-      } else {
-        ev.target.className = "correct";
-        ev.target.parentElement.className = 'answers locked'
-        setScore(score + 100 * timer);
-        setTimer(3);
-      }
-    } else {
-      if (questions.length > 1) {
-        ev.target.className = "incorrect";
-        ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.value === question.correct && (currentValue.className = "correct"));
-        ev.target.parentElement.className = 'answers locked'
-        
-        setTimer(3);
-        setTimeout(() => {
-          setQuestions(questions.slice(1));
-          setTimer(20);
-          ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.className = "");
-          ev.target.parentElement.className = 'answers'
-        }, 3000);
-      } else {
-        ev.target.className = "incorrect";
-        ev.target.parentElement.childNodes.forEach((currentValue) => currentValue.value === question.correct && (currentValue.className = "correct"));
-        ev.target.parentElement.className = 'answers locked'
-        setTimer(3);
-      }
-    }
   };
 
   return loader ? (
