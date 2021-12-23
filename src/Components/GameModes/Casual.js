@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import useTimer from "../../hooks/useTimer";
 import useQuestionList from "../../hooks/useQuestionList";
 import useAnswerHandler from "../../hooks/answerHandler";
-import "../../Assets/SCSS/Casual.scss";
 import { useOutletContext } from "react-router-dom";
 
 const Casual = () => {
@@ -26,7 +25,7 @@ const Casual = () => {
   return loader ? (
     <div className="loader" />
   ) : (
-    <div className="casual">
+    <div className="gameplay">
       <div className="category">
         <h2>{question.category}</h2>
         <h2>{timer}</h2>
@@ -37,7 +36,6 @@ const Casual = () => {
       </div>
 
       <div className="answers">
-        <div className="overly" />
         {question.answers.map((object, index) => {
           return (
             <input

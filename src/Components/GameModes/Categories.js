@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import useQuestionList from "../../hooks/useQuestionList";
 import useTimer from "../../hooks/useTimer";
 import useAnswerHandler from "../../hooks/answerHandler";
-
-import "../../Assets/SCSS/Categories.scss";
 
 const Categories = () => {
   const difficulty = useOutletContext()[3];
@@ -29,7 +27,7 @@ const Categories = () => {
   return loader ? (
     <div className="loader" />
   ) : (
-    <div className="categories">
+    <div className="gameplay">
       <div className="category">
         <h2>{question.category}</h2>
         <h2>{timer}</h2>
@@ -40,7 +38,6 @@ const Categories = () => {
       </div>
 
       <div className="answers">
-        <div className="overly" />
         {question.answers.map((object, index) => {
           return (
             <input

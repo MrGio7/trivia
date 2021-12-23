@@ -4,6 +4,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import useComponentVisible from "../hooks/useComponentVisible";
 
 import "../Assets/SCSS/Home.scss";
+import "../Assets/SCSS/Gameplay.scss";
 
 const Home = () => {
   const setDifficulty = useOutletContext()[4];

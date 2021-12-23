@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-
-import "../../Assets/SCSS/Ranking.scss";
 import { useOutletContext } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 import useQuestionList from "../../hooks/useQuestionList";
@@ -46,7 +44,7 @@ const Ranking = () => {
       <h1>Please Log In first</h1>
     </div>
   ) : (
-    <div className="ranking">
+    <div className="gameplay">
       <h3>SCORE: {score}</h3>
       <div className="category">
         <h2>{question.category}</h2>
