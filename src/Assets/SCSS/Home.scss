@@ -110,3 +110,38 @@
     }
   }
 }
+
+
+@media (min-width: $desktop) {
+  .home{
+    width: 50%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    p{
+      width: 100%;
+    }
+
+    a{
+      width: 45%;
+
+      .button{
+        width: 100%;
+      }
+    }
+    .button{
+      width: 45%;
+      height: 80px;
+
+      span{
+        font-size: 2rem;
+      }
+    }
+
+    .modal{
+      width: 20%;
+      left: 40%;
+    }
+  }
+}

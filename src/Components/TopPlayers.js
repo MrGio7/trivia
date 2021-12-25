@@ -23,7 +23,7 @@ const TopPlayers = () => {
   return (
     <div className="TopPlayers">
       <div className="header">
-        <h1>Here are our game TOP PLAYERS:</h1>
+        <h1>TOP PLAYERS:</h1>
       </div>
 
       <div className="body">

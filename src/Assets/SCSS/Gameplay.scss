@@ -122,3 +122,24 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media (min-width: $desktop) {
+  .gameplay{
+    width: 50%;
+
+    .answers{
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      input{
+        width: 45%;
+        height: 80px;
+        font-size: 2rem;
+
+        &:hover{
+          color: $white;
+        }
+      }
+    }
+  }
+}

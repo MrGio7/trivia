@@ -42,7 +42,7 @@ const App = () => {
     <div className="App">
       <Navigation userInfo={userInfo} ranking={ranking}/>
       <Outlet context={[userInfo, ranking, setRanking, difficulty, setDifficulty, category, setCategory]} />
-      <div className="footer"></div>
+      <footer className="footer"></footer>
     </div>
   )
 };

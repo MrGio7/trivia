@@ -47,3 +47,20 @@
     }
   }
 }
+
+
+@media (min-width: $desktop) {
+  .registerPage{
+    width: 50%;
+
+    form{
+      input{
+        width: 100%;
+      }
+
+      input[type=submit]{
+        width: 30%;
+      }
+    }
+  }
+}

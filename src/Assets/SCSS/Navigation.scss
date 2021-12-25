@@ -6,8 +6,13 @@
   flex-direction: column;
   width: 100%;
   height: 60px;
-  padding:10px;
-  background-image: linear-gradient(135deg, $persian-green, $charcoal, $persian-green);
+  padding: 10px 3%;
+  background-image: linear-gradient(
+    135deg,
+    $persian-green,
+    $charcoal,
+    $persian-green
+  );
 
   .navBtns {
     display: flex;
@@ -20,7 +25,7 @@
       color: $black;
     }
 
-    .userOpened{
+    .userOpened {
       color: $persian-green;
       background-color: $black;
       border-radius: 50%;
@@ -33,7 +38,7 @@
     .navLinks {
       width: 0%;
       overflow: hidden;
-      transition: .5s;
+      transition: 0.5s;
       display: flex;
       flex-direction: column;
       position: absolute;
@@ -42,30 +47,30 @@
       z-index: 2;
       background-image: linear-gradient(135deg, $persian-green, $charcoal);
       border-radius: 0 0 10px 0;
-      
+
       a {
         text-decoration: none;
         font-size: 1.8rem;
         font-weight: bold;
         color: $black;
-        padding:20px 10px;
+        padding: 20px 10px;
       }
 
-      &.opened{
+      &.opened {
         width: 50%;
       }
-    } 
+    }
 
     .userPage {
       width: 0%;
       overflow: hidden;
-      transition: .5s;
+      transition: 0.5s;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       position: absolute;
-      top:60px;
+      top: 60px;
       right: 0px;
       z-index: 2;
       background-image: linear-gradient(225deg, $persian-green, $charcoal);
@@ -79,7 +84,7 @@
         width: 80%;
         display: flex;
         flex-direction: column;
-    
+
         input {
           width: 100%;
           padding: 15px 20px;
@@ -87,19 +92,19 @@
           box-sizing: border-box;
           border-radius: 10px;
         }
-    
+
         label {
           font-size: 1.5rem;
           font-weight: bold;
           margin-top: 10px;
           margin-bottom: 5px;
         }
-    
+
         .loginBtn {
           @include btn($black);
           font-size: 1.5rem;
         }
-        
+
         a {
           text-decoration: none;
           width: 100%;
@@ -107,12 +112,12 @@
           margin-bottom: 10px;
         }
       }
-  
+
       img {
         height: 100px;
         border-radius: 50%;
       }
-  
+
       h2 {
         animation: transform 0.6s 1;
         font-size: 1.8rem;
@@ -120,14 +125,14 @@
         cursor: pointer;
         margin-bottom: 7px;
       }
-  
+
       h3 {
         animation: transform 0.6s 1;
         font-size: 1.5rem;
         cursor: pointer;
         margin-bottom: 15px;
       }
-  
+
       input {
         animation: transform 0.6s 1;
         width: 80%;
@@ -136,7 +141,7 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
       }
-  
+
       .logoutBtn {
         background-color: $burnt-sienna;
         cursor: pointer;
@@ -149,8 +154,58 @@
         margin-bottom: 15px;
       }
 
-      &.opened{
+      &.opened {
         width: 50%;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .navBar {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
+    .navBtns {
+      svg {
+        display: none;
+      }
+
+      .userOpened,
+      .userClosed {
+        display: block;
+        margin-right: 10px;
+      }
+    }
+
+    .menu {
+      .navLinks {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: max-content;
+        top: 0;
+        background: none;
+        margin: 0;
+        padding: 0;
+
+        a {
+          margin: 0 10px;
+          padding: 0;
+
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+
+      .userPage {
+        &.opened {
+          width: 30%;
+        }
       }
     }
   }
